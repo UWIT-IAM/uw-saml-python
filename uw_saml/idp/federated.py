@@ -1,0 +1,162 @@
+"""Federated Identity Providers."""
+from . import IdpConfig, attribute
+
+class CascadiaStudentIdp(IdpConfig):
+    entity_id = 'https://idp.cascadia.edu/idp/shibboleth'
+    sso_url = 'https://idp.student.cascadia.edu/idp/profile/SAML2/Redirect/SSO'
+    id_attribute = 'urn:mace:washington.edu:dir:attribute-def:stu-validationID'
+    x509_cert = '''
+        MIIDTDCCAjSgAwIBAgIVAKF/idZbWozYUUVYSAZqNtoPhTTpMA0GCSqGSIb3DQEB
+        BQUAMCMxITAfBgNVBAMTGGlkcC5zdHVkZW50LmNhc2NhZGlhLmVkdTAeFw0wOTA3
+        MTcxNzM0NDZaFw0yOTA3MTcxNzM0NDZaMCMxITAfBgNVBAMTGGlkcC5zdHVkZW50
+        LmNhc2NhZGlhLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKsC
+        6uf6XGhfUYhypRK7BNXr9df4phb1pAISvXXGvICQB/iABP40fbMgk1+RVwjTVXj2
+        40JBlmYiHZ69Gcwv6GyIhbouNTb46k5Pp/bmU3K0oqwWHjbE68CyHS5IxRPImAlR
+        OeTFI4LFNvnNvZPb7uRhYAg1EgmJXjwscUqssNCmXozesHwM7vEjv/6jfeQ2RLB3
+        q2QVVuMEcFYh21+lNY07HmKkxBFSifHu2qKyVpLK7CWd8Qsj7v6cy/ixEc9VJdBJ
+        ptridTi2zcv33E4hZGrCvwWjdwPt/evOGOY7umUzOokbT6tqPFTUAmdlEeJKAdyv
+        FXVki+85jyJm0xg3FkkCAwEAAaN3MHUwVAYDVR0RBE0wS4IYaWRwLnN0dWRlbnQu
+        Y2FzY2FkaWEuZWR1hi9odHRwczovL2lkcC5zdHVkZW50LmNhc2NhZGlhLmVkdS9p
+        ZHAvc2hpYmJvbGV0aDAdBgNVHQ4EFgQUtK4D0urHY0BSPPxibiQcjWlp0YkwDQYJ
+        KoZIhvcNAQEFBQADggEBAGzAU57okBkfeaRUC1lnOXbjNfX/+XRTBY6dWLhlwxmK
+        zJ4yosaCHD6XsXuDwlVOeu0Ms38tvTakGlmLiJ644PKJVfrQeVRY22EKEJnpHMl5
+        mIKsRFjSA6we3sot0f/APiMqisieSLJHnd4Q7XXzt5ybBRSbDneEf0ukO+gqGHY2
+        TlwHPe9Z73h1R5sQdLlSAUDH/UKm+5uWb0K+o7STppImd0Fs+fEInSIzZk7YpAG3
+        v1S5a9uxu9q/jtCa5N49Dgu8H6p9dtqlVtU+v0ZQREpaLSxThI0gXMeDLhHKn+Oh
+        4evvj1ikdsX7XBiSpTNiUGMF0D7ZllSqTk+E+/Cyo5Q='''
+
+
+class CascadiaEmployeeIdp(CascadiaStudentIdp):
+    """
+    The only difference between an Cascadia Employee and a Student are the
+    IdP's endpoint. Even the id_attribute of 'stu-validationID' remains.
+    """
+    sso_url = ('https://idp.employee.cascadia.edu'
+               '/idp/profile/SAML2/Redirect/SSO')
+
+
+class CollegenetIdp(IdpConfig):
+    """
+    One thing of note about collegenet is that it encrypts attributes and thus
+    requires an SP cert and key.
+    """
+    _idp_url = 'https://shibboleth-idp.collegenet.com'
+    entity_id = f'{_idp_url}/idp/shibboleth'
+    sso_url = f'{_idp_url}/idp/profile/SAML2/Redirect/SSO'
+    # persistent id
+    id_attribute = 'urn:oid:1.3.6.1.4.1.5923.1.1.1.10'
+    mapped_id_attribute = attribute.NestedNameid('remote_user')
+    _attribute_prefix = 'https://applyweb.collegenet.com/account/attribute-def'
+    attribute_map = {
+        f'{_attribute_prefix}/act-userId': 'collegenet_userid'
+    }
+    x509_cert = '''
+        MIIDYDCCAkigAwIBAgIUE7bIe4hwDfwhSM8wn4E8Rza/AdEwDQYJKoZIhvcNAQEF
+        BQAwKDEmMCQGA1UEAxMdc2hpYmJvbGV0aC1pZHAuY29sbGVnZW5ldC5jb20wHhcN
+        MTAwMjExMjMxNTMyWhcNMzAwMjExMjMxNTMyWjAoMSYwJAYDVQQDEx1zaGliYm9s
+        ZXRoLWlkcC5jb2xsZWdlbmV0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+        AQoCggEBAIFEn4f9ObsbquJlOPvIazrYJ+cltWyFL5My6Sci6K1L/xTfRNAtGA3U
+        DQL3wOALSFtfddl/ULTfQYU2/AZKFj7BwA72lou6G9SUco5QchHUoaiCxnOs1LQ8
+        kP2rA5nsxwfJrYnGULx1+c7qKmatN+OftKL96LD6g2rBw794FZd7j29ptrqOv97B
+        gzVaH5od8ZMvegsKzpuYf0cOklD0dRJEW0ppb79JLJvSrWVX6K9oAvOXJx7+nHwK
+        BGqETOU4nhXXJOgyVqib7d3mCg7YWyJXl1tLnTLZrHLi7bVk2BKUZO2yT62SsBy3
+        MkThcDHokvyvwo/GUmF2dnJaYj59afUCAwEAAaOBgTB/MF4GA1UdEQRXMFWCHXNo
+        aWJib2xldGgtaWRwLmNvbGxlZ2VuZXQuY29thjRodHRwczovL3NoaWJib2xldGgt
+        aWRwLmNvbGxlZ2VuZXQuY29tL2lkcC9zaGliYm9sZXRoMB0GA1UdDgQWBBRf5n4e
+        0WSw5ow5doI1M71y7rzfGjANBgkqhkiG9w0BAQUFAAOCAQEAGlTRbPUU9d5ond5O
+        O3efuPRoIMCurUo6xaTD39rnr5m94Cr55n3dOwCnvjn0IMQvvvqGBJRD92i0VvZI
+        4r63QtU5ZqSeAiNG5FFCA89jnR6P0nZqXV3R3mRaRHDM2apD9pNz2PUtFdktw5AB
+        cURaOv4usFw8sWMQg0oM3rHC5VbTCCoQbmiRGiMCIqSEJbZ02JG+lUhrv1jp9xNj
+        PjDjvSkxTTH3Mo4Lt7jVww76pgWRDa8L0eZ4sOREQVqMXEMcB3JNy7fFimunvxgw
+        fIJN0Yk9uqeMFBoZiL8r0itI9BTt4gk2sYDbNnG6/pqoPS9mwmiM22XEeTeG1x3a
+        WWeBDw=='''
+
+
+class FredHutchIdp(IdpConfig):
+    entity_id = 'https://shib.fhcrc.org/idp/shibboleth'
+    sso_url = 'https://shib.fhcrc.org/idp/profile/SAML2/Redirect/SSO'
+    x509_cert = '''
+        MIIDIzCCAgugAwIBAgIUYqaDH2PjPdZ38g8PPuq3hjmdVQswDQYJKoZIhvcNAQEF
+        BQAwGTEXMBUGA1UEAxMOc2hpYi5maGNyYy5vcmcwHhcNMTEwMjIzMjMzNDEwWhcN
+        MzEwMjIzMjMzNDEwWjAZMRcwFQYDVQQDEw5zaGliLmZoY3JjLm9yZzCCASIwDQYJ
+        KoZIhvcNAQEBBQADggEPADCCAQoCggEBAJDWhNtMACDyyVwdEn7ZTt4teMurPpIQ
+        0QAnJB8A/VBo15/kkGQl6GKnjVT0yuXM9iRurwwbDh1nwhIaDX1kVqBCBueu4wh1
+        cceN1U+w5mhhWr37jc6hvml9vf/m/2GJcXyOEeneNOf5yo3Lvia4ueoW0qLAbsTr
+        36fYe8M1pa0AAudhpqUXDWdlXTfZdkPomufVVef6YpEVpJXxKezaF5BAYeyjAJ+k
+        vrIxZXIxghjoFDHkTdf536YAxj23HHp0aUciL2r+QgGhho9i6LRAnMFce5HESL/G
+        lIwHJLgvDgozCyw42kEPjQCwU7qBfnY33nmjBHLhw34sFZ1ElMOGbWMCAwEAAaNj
+        MGEwQAYDVR0RBDkwN4IOc2hpYi5maGNyYy5vcmeGJWh0dHBzOi8vc2hpYi5maGNy
+        Yy5vcmcvaWRwL3NoaWJib2xldGgwHQYDVR0OBBYEFH2yMS2n85KB2MuYt1flMZt4
+        rhJLMA0GCSqGSIb3DQEBBQUAA4IBAQAK8eF4qh4l1cMY3X9v3+TN2+Ld+CkowKp/
+        ALkr81YRVui4tbMOZ7yQs5WdEY3J4QJrDtQ2tsComdAWb0JIpRwJLHnj1cO3bAel
+        jJr8GY4oXUUPGAJpRi5Ly6UKTQKEAHvBdsq6JQQqRLYN5yO1f2lr+QHnizs8rS5a
+        +3dB0vs3YxYy1OqKzBLaCH13QkZClNBl87/62OLpnpEm6tAOSiWsD/4unPe2kOW5
+        19aqTzwjsV2Am2OINyXSKUK1yA6B5nv9LUzO2ESIH9A06DOYlXWch6u7a0b+3URk
+        //e64IUXSJ1NqLsVrX68mC2ysMMojbRiOdmV9mPUcpizb0devpvc'''
+
+
+class SccaIdp(IdpConfig):
+    x509_cert = '''
+        MIIGFzCCBP+gAwIBAgITHQAAAV+l62jdEnLx3AAAAAABXzANBgkqhkiG9w0BAQsF
+        ADCB9TELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExDzANBgNVBAcT
+        BklydmluZTEfMB0GA1UEChMWU2VjdXJlQXV0aCBDb3Jwb3JhdGlvbjFCMEAGA1UE
+        CxM5KGMpIDIwMTUgU2VjdXJlQXV0aCBDb3Jwb3JhdGlvbiAtIEZvciBhdXRob3Jp
+        emVkIHVzZSBvbmx5MR0wGwYDVQQLExRDZXJ0aWZpY2F0ZSBTZXJ2aWNlczE8MDoG
+        A1UEAxMzU2VjdXJlQXV0aCBHMyBJbnRlcm1lZGlhdGUgQ2VydGlmaWNhdGUgQXV0
+        aG9yaXR5IDJBMB4XDTE1MDgyNTE5MTQzMloXDTI1MDUyNzE3NDI0N1owgbcxCzAJ
+        BgNVBAYTAlVTMRMwEQYDVQQIEwpXYXNoaW5ndG9uMRAwDgYDVQQHEwdTZWF0dGxl
+        MSUwIwYDVQQKExxTZWF0dGxlIENhbmNlciBDYXJlIEFsbGlhbmNlMTIwMAYDVQQL
+        EylNYW5hZ2VyIEluZm9ybWF0aW9uIFNlY3VyaXR5IEFyY2hpdGVjdHVyZTEmMCQG
+        A1UEAxMdU2VjdXJlQXV0aDAxVk0uc2VhdHRsZWNjYS5vcmcwggEiMA0GCSqGSIb3
+        DQEBAQUAA4IBDwAwggEKAoIBAQCpvJ1ejW+XS4VEuY/8RBruZn/ZECeS7cV1Ippo
+        ZQsxmJ3PQpb2bQTf6lfqtfVLs7DA7sjX5C7Xcy80RuecVfdbRi+15L5ewwh3lJDD
+        vEgtmODne482g4++nHc0r+Tk9wh2mCXk6Bov2z95SjkOgSjR0YQQ4hTWykpky9we
+        5TXcPfCl9BSdrnxyWZlabxnY4kKaGHcjCp+/mqzMJ0Eus2j+cfvQPTTp0oUwpRDb
+        aD8t/0dEpYbDpjM1Wi6JJ3uxzujK+dm83arxvjSEfqr5/TD3n7pUZb+03zP/PEAO
+        FktIDxbe+OgNSQK2YJXNXRYBnIhULakad4ESKsIxiPAWRjutAgMBAAGjggHaMIIB
+        1jAOBgNVHQ8BAf8EBAMCBPAwIAYDVR0lAQH/BBYwFAYIKwYBBQUHAwEGCCsGAQUF
+        BwMCMB0GA1UdDgQWBBQeD+nQeJjrbxA7UdUHmcJvCgFWfzAzBgNVHREELDAqggls
+        b2NhbGhvc3SCHVNlY3VyZUF1dGgwMVZNLnNlYXR0bGVjY2Eub3JnMB8GA1UdIwQY
+        MBaAFOktSiOpOlaZiHIelDyJxMDEv5T+MHcGA1UdHwRwMG4wbKBqoGiGZmh0dHA6
+        Ly9jbG91ZC5zZWN1cmVhdXRoLmNvbS9DZXJ0SW5mby9TZWN1cmVBdXRoJTIwRzMl
+        MjBJbnRlcm1lZGlhdGUlMjBDZXJ0aWZpY2F0ZSUyMEF1dGhvcml0eSUyMDJBLmNy
+        bDCBswYIKwYBBQUHAQEEgaYwgaMwgaAGCCsGAQUFBzAChoGTaHR0cDovL2Nsb3Vk
+        LnNlY3VyZWF1dGguY29tL0NlcnRJbmZvL011bHRpZmFjdHItVk0yMy5iYW5uZXIu
+        bXVsdGlmYWN0b3J0cnVzdDMuY29tX1NlY3VyZUF1dGglMjBHMyUyMEludGVybWVk
+        aWF0ZSUyMENlcnRpZmljYXRlJTIwQXV0aG9yaXR5JTIwMkEuY3J0MA0GCSqGSIb3
+        DQEBCwUAA4IBAQALVbM7yjZOCMx0l42KVGT5uV+DbflTJ7OFVZDHYYewY6xTaDf3
+        Ob3kj5pkHGnKk+Z0hFrg1FixI+/jlzV8jiGI+Ic+oKvemEeyfMrTkGmDlBNznJHA
+        NI9ciJ/x8UWMXooYM9il1242T9r+DD+0q5AZhOemhu9iEN2++XzDCZGZLAITNhjo
+        5tM6OvHr6xo0Fmr03B11Wwhybgf9ItcFyq14rcwnCQ9/U/p6/jEtYFRUx++a/lZO
+        ef3aY+ojRtKVvv0ZaS35cz5lHgVepD0xP/djCj1Uy73JPOkYjuNpq8WsJudj38dC
+        4+1iVLOGVJk7934mItYZeFg2VStjumSp830k'''
+
+    def __init__(self, entity_id):
+        """This varies by environment and is equivalent to the acs url."""
+        self.entity_id = entity_id
+        self.sso_url = entity_id
+
+
+class TestIdp(IdpConfig):
+    _idp_url = 'https://thor-idp.cac.washington.edu'
+    entity_id = f'{_idp_url}/idp/shibboleth'
+    sso_url = f'{_idp_url}/idp/profile/SAML2/Redirect/SSO'
+    x509_cert = '''
+        MIIDVzCCAj+gAwIBAgIUedVWX+JQX04XEack4w0QDiIDGlQwDQYJKoZIhvcNAQEL
+        BQAwJjEkMCIGA1UEAwwbdGhvci1pZHAuY2FjLndhc2hpbmd0b24uZWR1MB4XDTE4
+        MDEwMzE2MDY0MFoXDTM4MDEwMzE2MDY0MFowJjEkMCIGA1UEAwwbdGhvci1pZHAu
+        Y2FjLndhc2hpbmd0b24uZWR1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+        AQEAnTQHW/mvtzJc4MVCt7xa/sOWvvsi19MHf6yPMSXOASILNEmXwqBsmjogVQnK
+        urjk9sO4tPSWpRFG3vlk5CjFHUHLZlzY6g+h0qcqE6Rh833rqi9IywY9T5wM5ssH
+        BbvAbVvGK53oe31DoNn99Ig+PuW3k9QkzF71zGLCSZtSsYNWaErNx5qVX8C+VITM
+        gli5SOmKEJXJuOcCwUl1PjxPez/v+9z5WijFhMbYKPxvfwu2HAr+WwMjHucbm/k3
+        au2YLwUo9jt+TLZtxhkQKlXilVYZ8rJeFQ1XenqV6+nlH6nPQ92L1thGR4yx3LfM
+        85JR1hScRvOAtDultWgZ4xZCYQIDAQABo30wezAdBgNVHQ4EFgQUkFx2WA1kCtdB
+        pbcHqTvNWBR8HVQwWgYDVR0RBFMwUYIbdGhvci1pZHAuY2FjLndhc2hpbmd0b24u
+        ZWR1hjJodHRwczovL3Rob3ItaWRwLmNhYy53YXNoaW5ndG9uLmVkdS9pZHAvc2hp
+        YmJvbGV0aDANBgkqhkiG9w0BAQsFAAOCAQEAcWf5OeoRmz05/itP4GaUL+uJzO4f
+        o3bFvU1QwETMm8Lkukh0sdsyDs6cVwgp8Pt738isj52+jwPSzEl+4Iirh8t7c84o
+        J4Yj4lhvDXEb7wPPR1/3xWSaMPFFqNHpqqDp5x1Wq7h7MYc/Pq8ApNTISvtnKar8
+        vPEek8lr1WxNQfLgaSUyb3uHOCAaQQnLCQzfQGSpqwcn3OsLxfFP5a0jdcXGNPwg
+        Ul/zCgXGtpqj0pgaGKncgEwAX/CItsqUmnia58mMAzUQfbEtawSBw8QztBh1uJ/J
+        szamvpcczUDLghpfj8byPjyTBIWAeJFVfmOJRsob+NcspvuZXMcKd8o+RQ=='''
