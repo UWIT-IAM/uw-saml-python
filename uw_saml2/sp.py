@@ -36,7 +36,7 @@ class Config(object):
             'sp': {
                 'entityId': self.entity_id,
                 'assertionConsumerService': {
-                    'url': sp.acs_url,
+                    'url': self.acs_url,
                     'binding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
                 },
                 'x509cert': self.cert,

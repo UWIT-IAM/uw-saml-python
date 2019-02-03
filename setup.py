@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-VERSION_FILE = os.path.join(BASE_DIR, 'uw_saml', 'VERSION')
+VERSION_FILE = os.path.join(BASE_DIR, 'uw_saml2', 'VERSION')
 with open(VERSION_FILE) as f:
     VERSION = f.readlines()[-1].strip()
 
@@ -14,7 +14,7 @@ setup(name='uw-saml',
       url='https://github.com/UWIT-IAM/uw-saml-python',
       author='UW-IT Identity and Access Management',
       author_email='help@uw.edu',
-      description='UW-specific adapter to the python3-saml package.',
+      description='A UW-specific adapter to the python3-saml package.',
       long_description=LONG_DESCRIPTION,
       long_description_content_type='text/markdown',
       license='Apache License, Version 2.0',

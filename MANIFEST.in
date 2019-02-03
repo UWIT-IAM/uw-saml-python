@@ -1,0 +1,3 @@
+include README.md
+include uw_saml2/VERSION
+global-exclude *.pyc __pycache__
