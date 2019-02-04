@@ -16,7 +16,7 @@ class Config(object):
             self.entity_id = entity_id
         if acs_url:
             self.acs_url = acs_url
-    
+
     def request(self, post=None):
         post = post or {}
         parsed_url = urlparse(self.acs_url)

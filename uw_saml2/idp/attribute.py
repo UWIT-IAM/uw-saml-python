@@ -1,6 +1,11 @@
 """Attribute mappings."""
 
+
 def map(attribute_data, idp):
+    """
+    Map attribute data from an IdP's SAML Response to values that are
+    easier to consume.
+    """
     attribute_map = {idp.id_attribute: idp.mapped_id_attribute}
     attribute_map.update(idp.attribute_map)
     for key, values in attribute_data.items():
@@ -10,6 +15,7 @@ def map(attribute_data, idp):
         value = attribute.map(values)
         if value is not None:
             yield attribute.name, value
+
 
 class Attribute:
     """Base class for mapping a list of attribute values."""

@@ -20,5 +20,6 @@ setup(name='uw-saml',
       license='Apache License, Version 2.0',
       packages=find_packages(),
       include_package_data=True,
-      install_requires=['python3-saml']
+      install_requires=['python3-saml'],
+      tests_require=['pytest', 'pytest-cov', 'mock', 'pycodestyle']
       )

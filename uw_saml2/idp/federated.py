@@ -1,6 +1,7 @@
 """Federated Identity Providers."""
 from . import IdpConfig, attribute
 
+
 class CascadiaStudentIdp(IdpConfig):
     entity_id = 'https://idp.cascadia.edu/idp/shibboleth'
     sso_url = 'https://idp.student.cascadia.edu/idp/profile/SAML2/Redirect/SSO'

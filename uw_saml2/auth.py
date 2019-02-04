@@ -16,6 +16,8 @@ def login_redirect(entity_id=None, acs_url=None, return_to='/',
     acs_url - The SP endpoint the Identity Provider will post back to, known
         technically as the Assertion Consumer Service. This endpoint along
         with the Entity Id are registered with the IdP.
+    return_to - The URL to send back to after authentication. This is known
+        in a SAML request as 'RelayState'.
     force_authn - whether to force authentication even if the user has already
         authenticated against the IdP.
     idp - which IdP to use, defaulting to UW's IdP. Other IdPs of type

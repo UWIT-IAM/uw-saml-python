@@ -24,6 +24,7 @@ Response.
 
 ```python
 from flask import request, session, redirect
+import uw_saml2
 
 @app.route('/saml/login', methods=['GET', 'POST'])
 def login():
