@@ -1,11 +1,22 @@
 language: python
 python:
-  - "3.6"
+  - '3.6'
 install:
-  - pip install -e .[test]
+  - git describe --tags > uw_saml2/VERSION
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq libxmlsec1-dev
+  - pip install -U -e .[test]
   - pip install coveralls
 script:
-  - pycodestyle
-  - pytest --cov
+  - pycodestyle .
+  - pytest --cov uw_saml2
 after_success:
   - coveralls
+deploy:
+  skip_cleanup: true
+  provider: pypi
+  user: jeffrouw
+  password:
+    secure: YeS26sPPRJav+MPhFfcPmLc2kOR3ENpAob9wDKcDg9RCF5GbljjLPuGLmUrGnFCcYm3HzyKmyH8Tb8YE3ekXwb77hTYyuHpgdvL7J7aAWtnmEcXAMD8fUUQWjEB7gZaWq5bJlTejM4+1M9or1p9ll4N17YI+vrYDTSeISpMc9R2u5KhImbr5Yx37E8VvlltRiu3lyuqXTvngpuFSIFQsI2ReN4sPn9m1RVr68P1KelMuWBnd/fE7iRw+sGgLks2J2n8oli/ue+r3Y2CGb/mlg0L3QCHU6CDEZW9CdDz8e0VJLtNsO4fQX9LUcRdap77ixbhn+oAuARuqn4h9UkOdriwW0s6R9hbtwIcHmxuG7bGq2E8Q7B6hyFLp05peb4QIKf95meWJMt6brpngeMOHz4xoBwY2HTqfGS0tE0ItJlq8B/IlAxelSqlSBlegbHJXrpql063U0SCz2jyv37Bnw0x6uvCA3x4ym2lVqVMP8NyIeiLoZMJZmc4wmr0iWPugPLInyFDOvoJH+xovmD8bYhDQ0v5uDFfVNAHkXDxCVSZn18jBc1kUJZ5LOsZifXvhk8zBtl4+VOWcTXHRkqiLN82LQYrzj1aXyUPxLVuxIHlZtaKm9OfSf6zGV0I7/qYgIsNZqedFWHE9DjmJ3X6/99xlVU35lhKcYS6P20S6I5E=
+  on:
+    tags: true

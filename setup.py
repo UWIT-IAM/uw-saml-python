@@ -7,7 +7,7 @@ with open(VERSION_FILE) as f:
     VERSION = f.readlines()[-1].strip()
 
 with open(os.path.join(BASE_DIR, 'README.md')) as f:
-      LONG_DESCRIPTION = f.read()
+    LONG_DESCRIPTION = f.read()
 
 setup(name='uw-saml',
       version=VERSION,
