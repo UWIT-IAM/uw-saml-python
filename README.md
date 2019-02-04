@@ -7,13 +7,13 @@ Identity Provider. It can be used against any framework. For a django-specific
 package, also consider
 [uw-django-saml2](https://github.com/uw-it-aca/uw-django-saml2).
 
-# Installation
+## Installation
 
 ```bash
 pip install uw-saml
 ```
 
-# Example login endpoint using flask
+## Example login endpoint using flask
 
 In this example you've gone to
 [SP Registry](https://iam-tools.u.washington.edu/spreg) and registered an
@@ -48,7 +48,7 @@ def login():
     return 'Welcome ' + session['userid']
 ```
 
-# Considerations
+## Considerations
 
 Give some consideration to session lifetime. The session in this example lives as a
 signed cookie. Ideally the cookie would expire at browser close, along with
