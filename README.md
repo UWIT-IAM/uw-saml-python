@@ -1,5 +1,8 @@
 # uw-saml
 
+[![Build Status](https://travis-ci.org/UWIT-IAM/uw-saml-python.svg?branch=master)](https://travis-ci.org/UWIT-IAM/uw-saml-python)
+[![Coverage Status](https://coveralls.io/repos/github/UWIT-IAM/uw-saml-python/badge.svg?branch=master)](https://coveralls.io/github/UWIT-IAM/uw-saml-python?branch=master)
+
 A UW-specific adapter to the
 [python3-saml](https://github.com/onelogin/python3-saml) package. This package
 was built to federate with other IdPs, but the default case is to use the UW
