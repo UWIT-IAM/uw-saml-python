@@ -27,6 +27,19 @@ class List(Attribute):
         return values[:]
 
 
+class UWGroups(List):
+    """An attribute that splits out the common UW Groups prefix."""
+    prefix = 'urn:mace:washington.edu:groups:'
+
+    def map(self, values):
+        results = []
+        for value in values:
+            if value.startswith(self.prefix):
+                value = value.split(self.prefix)[1]
+            results.append(value)
+        return results
+
+
 class NestedNameid(Attribute):
     """An attribute that's an object of a NameId structure."""
     def map(self, values):
