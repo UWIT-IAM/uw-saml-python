@@ -21,5 +21,5 @@ setup(name='uw-saml',
       packages=find_packages(),
       include_package_data=True,
       install_requires=['python3-saml'],
-      tests_require=['pytest', 'pytest-cov', 'mock', 'pycodestyle']
+      extras_require={'test': ['pytest', 'pytest-cov', 'mock', 'pycodestyle']}
       )
