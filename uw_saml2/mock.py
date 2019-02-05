@@ -1,4 +1,6 @@
 import urllib.parse
+from .idp import uw, federated
+MOCK_LOGIN_URL = '/mock-login'
 
 
 class SamlAuthenticator:
@@ -10,7 +12,7 @@ class SamlAuthenticator:
     def login(self, **kwargs):
         kwargs['idp'] = self.idp
         qs = urllib.parse.urlencode(kwargs)
-        return f'mock-login?{qs}'
+        return f'{MOCK_LOGIN_URL}?{qs}'
 
     def process_response(self):
         idp = self.request['post_data'].get('idp')
@@ -20,8 +22,16 @@ class SamlAuthenticator:
 
     def get_attributes(self):
         """Just reflect what's posted right back."""
-        items = self.request['post_data'].items()
-        return dict((key, [value]) for key, value in items)
+        post = self.request['post_data']
+        remote_user = post.get('remote_user', '')
+        attributes = {}
+        if post.get('idp') == uw.UwIdp.entity_id:
+            uwnetid = remote_user.split('@washington.edu')[0]
+            attributes['uwnetid'] = [uwnetid]
+        elif post.get('idp') == federated.CollegenetIdp.entity_id:
+            attributes['collegenet_userid'] = [remote_user]
+        attributes.update((key, [value]) for key, value in post.items())
+        return attributes
 
     def get_errors(self):
         return self.errors
