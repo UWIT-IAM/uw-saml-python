@@ -1,2 +1,7 @@
 venv
 .vscode
+*.egg-info
+.eggs
+__pycache__
+dist
+.coverage

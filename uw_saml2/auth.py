@@ -1,5 +1,5 @@
 """UW-specific adapter for the python3-saml package."""
-from onelogin.saml2.auth import OneLogin_Saml2_Auth
+from .python3_saml import get_saml_authenticator
 from .idp.uw import UwIdp
 from .sp import Config, TWO_FACTOR_CONTEXT
 from .idp import attribute
@@ -28,7 +28,7 @@ def login_redirect(entity_id=None, acs_url=None, return_to='/',
     """
     sp = Config(entity_id, acs_url)
     config = sp.config(idp, two_factor=two_factor)
-    auth = OneLogin_Saml2_Auth(sp.request(), old_settings=config)
+    auth = get_saml_authenticator(sp.request(), old_settings=config)
     return auth.login(return_to=return_to, force_authn=force_authn)
 
 
@@ -50,7 +50,7 @@ def process_response(post, entity_id=None, acs_url=None, idp=UwIdp,
     """
     sp = Config(entity_id, acs_url)
     config = sp.config(idp, two_factor=two_factor)
-    auth = OneLogin_Saml2_Auth(sp.request(post), old_settings=config)
+    auth = get_saml_authenticator(sp.request(post), old_settings=config)
     auth.process_response()
     errors = auth.get_errors()
     if errors:

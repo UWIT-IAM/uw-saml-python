@@ -13,8 +13,14 @@ package, also consider
 ## Installation
 
 ```bash
-pip install uw-saml
+pip install uw-saml[python3-saml]
 ```
+
+The extra `[python3-saml]` is because the SAML package can be cumbersome to
+install in a workstation environment, on account of needing the libxmlsec1-dev
+library. Therefore, it's an optional requirement, causing a runtime error
+instead of an install-time error. Alternatively, you can use a mock
+interface by setting `uw_saml2.python3_saml.MOCK = True`.
 
 ## Example login endpoint using flask
 
