@@ -9,6 +9,10 @@ with open(VERSION_FILE) as f:
 with open(os.path.join(BASE_DIR, 'README.md')) as f:
     LONG_DESCRIPTION = f.read()
 
+saml_requires = ['python3-saml']
+tests_require = saml_requires + ['pytest', 'pytest-cov', 'mock', 'pycodestyle']
+
+
 setup(name='uw-saml',
       version=VERSION,
       url='https://github.com/UWIT-IAM/uw-saml-python',
@@ -20,6 +24,5 @@ setup(name='uw-saml',
       license='Apache License, Version 2.0',
       packages=find_packages(),
       include_package_data=True,
-      install_requires=['python3-saml'],
-      extras_require={'test': ['pytest', 'pytest-cov', 'mock', 'pycodestyle']}
+      extras_require={'python3-saml': saml_requires, 'test': tests_require}
       )
