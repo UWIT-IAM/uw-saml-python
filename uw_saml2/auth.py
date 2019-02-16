@@ -1,10 +1,14 @@
 """UW-specific adapter for the python3-saml package."""
+import werkzeug.contrib.cache
 from .python3_saml import get_saml_authenticator
 from .idp.uw import UwIdp
 from .sp import Config, TWO_FACTOR_CONTEXT
 from .idp import attribute
 from logging import getLogger
 logger = getLogger(__name__)
+
+# For distributed environments, inject a distributed cache.
+CACHE = werkzeug.contrib.cache.SimpleCache()
 
 
 def login_redirect(entity_id=None, acs_url=None, return_to='/',
@@ -55,6 +59,11 @@ def process_response(post, entity_id=None, acs_url=None, idp=UwIdp,
     errors = auth.get_errors()
     if errors:
         raise SamlResponseError(auth.get_last_error_reason())
+
+    message_id = auth.get_last_message_id()
+    if not CACHE.add(f'uw_saml2:response:message_id:{message_id}', True):
+        raise SamlResponseError(f'SAML Replay of {message_id}')
+
     attribute_data = dict(attribute.map(auth.get_attributes(), idp=idp))
 
     authn_contexts = auth.get_last_authn_contexts()

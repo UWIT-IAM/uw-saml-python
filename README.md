@@ -59,6 +59,8 @@ def login():
 
 ## Considerations
 
+### Sessions
+
 Give some consideration to session lifetime. The session in this example lives as a
 signed cookie. Ideally the cookie would expire at browser close, along with
 some time limit appropriate for your application. An example again with flask
@@ -71,3 +73,18 @@ app.config.update(
     PERMANENT_SESSION_LIFETIME=timedelta(minutes=10)
 )
 ```
+
+### Replay attack prevention
+
+By default this package uses an in-memory cache to check for replay attacks.
+To use a distributed cache such as redis or memcached you would inject a
+cache object into `uw_saml2.auth.CACHE`. Here's an example of how to do it...
+
+```python
+import werkzeug.contrib.cache
+import uw_saml2.auth
+
+uw_saml2.auth.CACHE = werkzeug.contrib.cache.RedisCache()
+```
+
+Django's cache backend uses the same methods so that could be injected as well.

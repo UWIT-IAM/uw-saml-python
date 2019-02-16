@@ -1,4 +1,5 @@
 import uw_saml2
+import uw_saml2.auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 import pytest
 import mock
@@ -52,6 +53,21 @@ def test_process_response(mock_time_and_id):
     assert attributes == expected_attributes
 
 
+def test_process_response_replay(mock_time_and_id):
+    with open(os.path.join(BASEDIR, 'samlresponse.txt')) as fd:
+        post = dict(urllib.parse.parse_qsl(fd.read()))
+    # set a time when this response was still valid
+    mock_time_and_id.return_value = 1549304000
+    entity_id = 'https://samldemo.iamdev.s.uw.edu/saml'
+    acs_url = 'https://samldemo.iamdev.s.uw.edu/saml/login'
+    attributes = uw_saml2.process_response(post, entity_id=entity_id,
+                                           acs_url=acs_url)
+    with pytest.raises(uw_saml2.auth.SamlResponseError) as excinfo:
+        attributes = uw_saml2.process_response(post, entity_id=entity_id,
+                                               acs_url=acs_url)
+    assert 'replay' in str(excinfo.value).lower()
+
+
 @pytest.fixture
 def mock_time_and_id(monkeypatch):
     """Mock the two things guaranteed to be nondeterministic - date and id."""
@@ -60,4 +76,5 @@ def mock_time_and_id(monkeypatch):
     mock_time.return_value = 1549302384
     monkeypatch.setattr(f'{utils}.now', mock_time)
     monkeypatch.setattr(f'{utils}.generate_unique_id', lambda: 'FOOBAR123')
+    uw_saml2.auth.CACHE.clear()
     return mock_time
