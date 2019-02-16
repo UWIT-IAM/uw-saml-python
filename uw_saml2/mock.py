@@ -1,4 +1,5 @@
 import urllib.parse
+from random import random
 from .idp import uw, federated
 MOCK_LOGIN_URL = '/mock-login'
 
@@ -18,7 +19,7 @@ class SamlAuthenticator:
         idp = self.request['post_data'].get('idp')
         if idp != self.idp:
             self.errors.append(f'idp mismatch {idp} != {self.idp}')
-        return
+        self.message_id = f'MOCKSAML{int(random() * 10**8)}'
 
     def get_attributes(self):
         """Just reflect what's posted right back."""
@@ -41,3 +42,6 @@ class SamlAuthenticator:
 
     def get_last_authn_contexts(self):
         return []
+
+    def get_last_message_id(self):
+        return self.message_id
