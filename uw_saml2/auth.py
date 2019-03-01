@@ -69,7 +69,7 @@ def process_response(post, entity_id=None, acs_url=None, idp=UwIdp,
     authn_contexts = auth.get_last_authn_contexts()
     attribute_data['two_factor'] = TWO_FACTOR_CONTEXT in authn_contexts
 
-    logger.info(attribute_data)
+    logger.info(f'{message_id}: {attribute_data}')
     return attribute_data
 
 
