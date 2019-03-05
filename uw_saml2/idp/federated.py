@@ -32,8 +32,12 @@ class CascadiaEmployeeIdp(CascadiaStudentIdp):
     The only difference between an Cascadia Employee and a Student are the
     IdP's endpoint. Even the id_attribute of 'stu-validationID' remains.
     """
-    sso_url = ('https://idp.employee.cascadia.edu'
-               '/idp/profile/SAML2/Redirect/SSO')
+    _idp_url = 'https://idp.employee.cascadia.edu'
+    _attribute_prefix = 'urn:mace:washington.edu:dir:attribute-def'
+    sso_url = f'{_idp_url}/idp/profile/SAML2/Redirect/SSO'
+    attribute_map = {
+        f'{_attribute_prefix}:emp-validationID': 'remote_user'
+    }
 
 
 class CollegenetIdp(IdpConfig):

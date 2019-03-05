@@ -24,7 +24,9 @@ class Attribute:
 
     def map(self, values):
         """Return only the first value in a list of values."""
-        return values and values[0]
+        if not values:
+            return None
+        return values[0]
 
 
 class List(Attribute):
