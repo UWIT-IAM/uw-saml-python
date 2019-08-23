@@ -14,9 +14,7 @@ after_success:
   - coveralls
 deploy:
   skip_cleanup: true
-  provider: pypi
-  user: __token__
-  password:
-    secure: "E1d7wBEWy4jxTJcOPt2aeVIic14rtfQWHcTsE3Ap5JUEv8c7Sf3bgCpD7zbQlyZlpXgp+ufhVCFJWCur7AEDlYBrtq73c9osUmwP5U4hs5xIXOH6xN4KG5Tdie00acYth6oIA4mCVt1x1SDA465LxSZGYEZmNq1bgBe3dheZHA4wF6INHvWihCJLIALy/+JA5H0gdQ4EpUJSHOT71eFKScKCd6SfP2jAO6yVz8eUtXs2wLVkagutdqPfhVnzvtjjeaJnCmcrEIeRQc0h6IRyLW5BUm0PLxX1gSI1lC61Qh4CyJcMzAC++Uhk3ZF/pqzmra7nju1Vr6iDkvcLI7MqvMdhlPoqMW/8r1yN1MT8Ef4UvpJyp7iLtMoFdAaVMwmM+Z+Fx9ZGX3EkFrZv7DuZBknu6j0SAjCC2l7hAFk3+AF1H6YU2QaYAfRjY6H7Qp0ihRtudTSAgRCF4OMzAcpTlgwA2xDwE51EIyJA9IwUbhUikIV6uUb3sgB+R53N/jKcdl/daBEMeiWStRK6zJpy6wnoti3UFLqDU+u8h08TJwy2JHoPr26GMBg84sX1gwzg4TWEciZJsDcC2tXv6RhnsCJccye+3ujJYkvk+3S8EMlExCY749SysmVNJTriELdQFdXStLmSpCau6KgqcztzlxXNBJn0GD+QiLvSteP7Llw="
+  provider: script
+  script: pip install twine && python setup.py sdist && twine upload dist/*
   on:
     tags: true
