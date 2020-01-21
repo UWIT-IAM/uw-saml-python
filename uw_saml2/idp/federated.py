@@ -100,7 +100,7 @@ class FredHutchIdp(IdpConfig):
         //e64IUXSJ1NqLsVrX68mC2ysMMojbRiOdmV9mPUcpizb0devpvc'''
 
 
-class FredHutchIdpAzure(IdpConfig):
+class FredHutchAzureIdp(IdpConfig):
     """
     Azure doesn't do things the Shibboleth way and FredHutch isn't
     acustomed to using ePPN
