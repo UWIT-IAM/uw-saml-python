@@ -102,7 +102,7 @@ class FredHutchIdp(IdpConfig):
 
 class FredHutchIdpAzure(IdpConfig):
     """
-    Azure doesn't do things the Shibboleth way and FredHutch isn't 
+    Azure doesn't do things the Shibboleth way and FredHutch isn't
     acustomed to using ePPN
     """
     _azure_tenant_id = '0054a3ea-b394-418b-ad1a-174138231fd6'
