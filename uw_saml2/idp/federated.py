@@ -100,6 +100,29 @@ class FredHutchIdp(IdpConfig):
         //e64IUXSJ1NqLsVrX68mC2ysMMojbRiOdmV9mPUcpizb0devpvc'''
 
 
+class FredHutchIdpAzure(IdpConfig):
+    _azure_tenant_id = '0054a3ea-b394-418b-ad1a-174138231fd6'
+    entity_id = f'https://sts.windows.net/{_azure_tenant_id}/'
+    sso_url = f'https://login.microsoftonline.com/{_azure_tenant_id}/saml2'
+    x509_cert = '''
+        MIIC8DCCAdigAwIBAgIQGB680XRFNZhCkepWMRYORjANBgkqhkiG9w0BAQsFADA0
+        MTIwMAYDVQQDEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZp
+        Y2F0ZTAeFw0yMDAxMjExNjI2NDhaFw0yMzAxMjExNjI2NDhaMDQxMjAwBgNVBAMT
+        KU1pY3Jvc29mdCBBenVyZSBGZWRlcmF0ZWQgU1NPIENlcnRpZmljYXRlMIIBIjAN
+        BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3q25FmIl5g8A0/PsrHHTE9d8/+Om
+        j7BGPiZPoml4IZvKeC9cAeE+UdCAOP30QPE0S1+PQHLj0nZwP0X52W7zsXrARfim
+        BseOYq0/yuccFEELfywPn9iDEhxJ68jw+QKbkKgfUqPm4/LY2wPLbFXtFL5F3nUB
+        M+a3emNlv3C5Gq8hYrevB0jDuNxfqglgrIkAmxNoPrvuOnlAm/FLQSb3EK92WxJ8
+        UwBsgOqk4ucSQSQ8BfGlsru8preUrlHv/04q9Byf4tkOFiKL/20IDDAA3shgkqtf
+        yOMOkvGmamT5WVT3Ug0JfO18ckwkvWPxSLeclWA9chkmpKrR8+e+7Jz4awIDAQAB
+        MA0GCSqGSIb3DQEBCwUAA4IBAQAY2cwjpBCPyTi6NSz/kDq8sIO2H0a+2D1ysmt6
+        QgqA/LoDHjnYJ83QHGbAMjIKwopmiLKkiXXyo2mpbqGURSWindf1ab58b/5LhAzv
+        mj64tz3btsQrxrJcs2vgrsG3S8oqR3PHGgbAKcoQt6wuX2e0/nf9ZJ+Do/hRQGtL
+        lyFsgAW1axDowtLY3Sp8dkRrBlJ6mhMCjfmjgBBiMjRl828nlGJHKiGCdpHh5DSc
+        zU0jc67sDs3f04ZzM5F+QZcpjQEOtx6oZOfsLuLZoYhJr/nEPwloY+qIStIBgs7H
+        Lci0jyi4EVo6rEh/3JMAnw3mUs2e5naG9j/5Uzvp6crN6gdN'''
+
+
 class SccaIdp(IdpConfig):
     x509_cert = '''
         MIIGFzCCBP+gAwIBAgITHQAAAV+l62jdEnLx3AAAAAABXzANBgkqhkiG9w0BAQsF
