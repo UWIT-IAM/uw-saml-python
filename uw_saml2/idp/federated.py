@@ -101,8 +101,9 @@ class FredHutchIdp(IdpConfig):
 
 
 class FredHutchIdpAzure(IdpConfig):
-    entity_id = 'https://sts.windows.net/0054a3ea-b394-418b-ad1a-174138231fd6/'
-    sso_url = 'https://login.microsoftonline.com/0054a3ea-b394-418b-ad1a-174138231fd6/saml2'
+    _azure_tenant_id = '0054a3ea-b394-418b-ad1a-174138231fd6'
+    entity_id = f'https://sts.windows.net/{_azure_tenant_id}/'
+    sso_url = f'https://login.microsoftonline.com/{_azure_tenant_id}/saml2'
     x509_cert = '''
         MIIC8DCCAdigAwIBAgIQGB680XRFNZhCkepWMRYORjANBgkqhkiG9w0BAQsFADA0
         MTIwMAYDVQQDEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZp
