@@ -99,6 +99,7 @@ class FredHutchIdp(IdpConfig):
         19aqTzwjsV2Am2OINyXSKUK1yA6B5nv9LUzO2ESIH9A06DOYlXWch6u7a0b+3URk
         //e64IUXSJ1NqLsVrX68mC2ysMMojbRiOdmV9mPUcpizb0devpvc'''
 
+
 class FredHutchIdpAzure(IdpConfig):
     entity_id = 'https://sts.windows.net/0054a3ea-b394-418b-ad1a-174138231fd6/'
     sso_url = 'https://login.microsoftonline.com/0054a3ea-b394-418b-ad1a-174138231fd6/saml2'
