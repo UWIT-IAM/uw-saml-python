@@ -1,5 +1,5 @@
 """UW-specific adapter for the python3-saml package."""
-import werkzeug.contrib.cache
+import cachelib
 from .python3_saml import get_saml_authenticator
 from .idp.uw import UwIdp
 from .sp import Config, TWO_FACTOR_CONTEXT
@@ -8,7 +8,7 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 # For distributed environments, inject a distributed cache.
-CACHE = werkzeug.contrib.cache.SimpleCache()
+CACHE = cachelib.SimpleCache()
 
 
 def login_redirect(entity_id=None, acs_url=None, return_to='/',
