@@ -24,6 +24,6 @@ setup(name='uw-saml',
       license='Apache License, Version 2.0',
       packages=find_packages(),
       include_package_data=True,
-      install_requires=['Werkzeug'],
+      install_requires=['Werkzeug', 'cachelib'],
       extras_require={'python3-saml': saml_requires, 'test': tests_require}
       )
