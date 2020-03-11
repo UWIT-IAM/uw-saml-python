@@ -106,9 +106,10 @@ class FredHutchAzureIdp(IdpConfig):
     acustomed to using ePPN
     """
     _azure_tenant_id = '0054a3ea-b394-418b-ad1a-174138231fd6'
+    _xmlsoap_prefix = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims'
     entity_id = f'https://sts.windows.net/{_azure_tenant_id}/'
     sso_url = f'https://login.microsoftonline.com/{_azure_tenant_id}/saml2'
-    id_attribute = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/employeeid'
+    id_attribute = f'{_xmlsoap_prefix}/employeeid'
     x509_cert = '''
         MIIC8DCCAdigAwIBAgIQGB680XRFNZhCkepWMRYORjANBgkqhkiG9w0BAQsFADA0
         MTIwMAYDVQQDEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZp
