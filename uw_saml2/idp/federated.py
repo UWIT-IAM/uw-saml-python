@@ -106,18 +106,18 @@ class FredHutchAzureIdp(IdpConfig):
     acustomed to using ePPN
     """
     _azure_tenant_id = '0054a3ea-b394-418b-ad1a-174138231fd6'
-    
-    entity_id = f'https://sts.windows.net/{_azure_tenant_id}/'
-    sso_url = f'https://login.microsoftonline.com/{_azure_tenant_id}/saml2'
     _attribute_prefix = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims'
     _attribute_prefix2 = 'http://schemas.microsoft.com/identity/claims'
+
+    entity_id = f'https://sts.windows.net/{_azure_tenant_id}/'
+    sso_url = f'https://login.microsoftonline.com/{_azure_tenant_id}/saml2'
     id_attribute = f'{_attribute_prefix}/employeeid'
     attribute_map = {
         f'{_attribute_prefix}/name': 'saml_unique_name',
         f'{_attribute_prefix2}/objectidentifier': 'saml_oid',
         f'{_attribute_prefix2}/displayname': 'saml_displayname',
-        f'{_attribute_prefix2}/authnmethodsreferences': 
-            'saml_authncontextclassref'
+        f'{_attribute_prefix2}/authnmethodsreferences':
+        'saml_authncontextclassref'
     }
     x509_cert = '''
         MIIC8DCCAdigAwIBAgIQGB680XRFNZhCkepWMRYORjANBgkqhkiG9w0BAQsFADA0
