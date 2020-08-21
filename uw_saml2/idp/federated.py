@@ -3,15 +3,18 @@ from . import IdpConfig, attribute
 
 
 class CascadiaIdp(IdpConfig):
-    #  Added this class to address new Cascadia IdP. Some parts may still need to be udpated.
-    #  entityID and sso_url from CCFederationMetadata.xml, which was supplied by Cascadia.
-    #  _attribute_prefix and id_attribute from FredHutchAzureIdp(IdpConfig) in this file
-    #  x509_cert from CCFederationMetadata.xml IDPSSODescriptor/KeyDescriptor/signing
+    #  Added this class to address new Cascadia IdP.
+    #  Some parts may still need to be udpated.
+    #  entityID and sso_url from CCFederationMetadata.xml, from Cascadia.
+    #  _attribute_prefix, id_attribute from FredHutchAzureIdp(IdpConfig)
+    #  x509_cert from
+    #  CCFederationMetadata.xml IDPSSODescriptor/KeyDescriptor/signing
     entityID = 'http://sts.cascadia.edu/adfs/services/trust'
     sso_url = 'https://sts.cascadia.edu/adfs/ls/'
     _attribute_prefix = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims'
     id_attribute = f'{_attribute_prefix}/employeeid'
-    x509_cert = '''  
+    _idp_url = 'https://idp.employee.cascadia.edu'
+    x509_cert = '''
         MIIC3DCCAcSgAwIBAgIQY8aKwjLQ9pRPN0sUxfcQoDANBgkqhkiG9w0BAQsFADAq
         MSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2FkaWEuZWR1MB4XDTE5
         MDUwMTE4NTQxMloXDTIwMDQzMDE4NTQxMlowKjEoMCYGA1UEAxMfQURGUyBTaWdu
