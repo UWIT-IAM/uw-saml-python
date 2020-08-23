@@ -2,6 +2,37 @@
 from . import IdpConfig, attribute
 
 
+class CascadiaIdp(IdpConfig):
+    #  Added this class to address new Cascadia IdP.
+    #  Some parts may still need to be udpated.
+    #  entityID and sso_url from CCFederationMetadata.xml, from Cascadia.
+    #  _attribute_prefix, id_attribute from FredHutchAzureIdp(IdpConfig)
+    #  x509_cert from
+    #  CCFederationMetadata.xml IDPSSODescriptor/KeyDescriptor/signing
+    entityID = 'http://sts.cascadia.edu/adfs/services/trust'
+    sso_url = 'https://sts.cascadia.edu/adfs/ls/'
+    _attribute_prefix = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims'
+    id_attribute = f'{_attribute_prefix}/employeeid'
+    _idp_url = 'https://idp.employee.cascadia.edu'
+    x509_cert = '''
+        MIIC3DCCAcSgAwIBAgIQY8aKwjLQ9pRPN0sUxfcQoDANBgkqhkiG9w0BAQsFADAq
+        MSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2FkaWEuZWR1MB4XDTE5
+        MDUwMTE4NTQxMloXDTIwMDQzMDE4NTQxMlowKjEoMCYGA1UEAxMfQURGUyBTaWdu
+        aW5nIC0gc3RzLmNhc2NhZGlhLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+        AQoCggEBAL1kehn2WeHbSr8NrExJPOg9h5/6Tc4313S85fwEeHC1y7X4YgQz+i7r
+        Yn/bxgJBykyjAo4yMrxbIlBhA1jyzvhPZu9Vv2a26MHSayzhN5QwRTf/GbqsU667
+        vul+drnE9ctGbErmhXEkJ0Y63s7+1liYB9VeEP+PLLib1A382n21pHa57QRPGPQz
+        KL8641pfARQdb6TTQkiV247vmJ3d51sXHoUL8bAeStYtLGuOdM1FJzfDSVRg6NY5
+        3xvX1sQV562+BlXT4CwKkxZUHgGiAWzAoJrTXecVjjbopo9iiozvvw3ujPyOoOmP
+        ky85oWwot+CuDHu0Z+YKVLWEmgJIemECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEA
+        gVhKaCISYlx5U4iKfblZPNohpCdbGOZ2pwVrFK3btc2XRJS+W2deNBHeyqBWk+71
+        5vddVq8RsEzkdTBO6atOFn3hEtB9yxtaX87mXEFudHx0dSeDvB//gYdHm9xYwwcD
+        XxBs6usQYpVkJ7R1nqysO4qwMfnKeSJvcMySyt1685o8fx3dMeY5ygMGmbYv6blG
+        CbTs8IYKr0Gwy/n4PM5D/5XGLJw6uin81jl7Mlr2UTCsj0gEfdfhvGJNXCB99/Ci
+        cgL1xCcVyVMhR2G3CxkvGgOdMeZJ3ZbWBF9vh88EdxbwAwdMNEkzOgXbvqoGUb0w
+        lRj1gstlLgMmDotwjBWRIw=='''
+
+
 class CascadiaStudentIdp(IdpConfig):
     entity_id = 'https://idp.cascadia.edu/idp/shibboleth'
     sso_url = 'https://idp.student.cascadia.edu/idp/profile/SAML2/Redirect/SSO'
