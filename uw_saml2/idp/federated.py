@@ -9,7 +9,7 @@ class CascadiaIdp(IdpConfig):
     #  _attribute_prefix, id_attribute from FredHutchAzureIdp(IdpConfig)
     #  x509_cert from
     #  CCFederationMetadata.xml IDPSSODescriptor/KeyDescriptor/signing
-    entityID = 'http://sts.cascadia.edu/adfs/services/trust'
+    entity_id = 'http://sts.cascadia.edu/adfs/services/trust'
     sso_url = 'https://sts.cascadia.edu/adfs/ls/'
     _attribute_prefix = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims'
     id_attribute = f'{_attribute_prefix}/employeeid'
