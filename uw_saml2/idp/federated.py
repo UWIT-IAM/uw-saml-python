@@ -14,22 +14,22 @@ class CascadiaIdp(IdpConfig):
     _attribute_prefix = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims'
     id_attribute = f'{_attribute_prefix}/employeeid'
     x509_cert = '''
-        MIIC3DCCAcSgAwIBAgIQIL4+sad1zpdJHC3y7KDcnDANBgkqhkiG9w0BAQsFADAq
+        MIIC3DCCAcSgAwIBAgIQETHAaMN+jqRIinfeu9IgLjANBgkqhkiG9w0BAQsFADAq
         MSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2FkaWEuZWR1MB4XDTIw
-        MDQxMDE5NDgxNloXDTIxMDQxMDE5NDgxNlowKjEoMCYGA1UEAxMfQURGUyBTaWdu
+        MDYxNDIxMzQwNVoXDTIxMDYxNDIxMzQwNVowKjEoMCYGA1UEAxMfQURGUyBTaWdu
         aW5nIC0gc3RzLmNhc2NhZGlhLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
-        AQoCggEBALcxrqHIbRCHcs0CFlwkVIEwwQGbeZEUpOvWMhWHa7SfqDB8264FTTgU
-        mGUzjCumQk1IiIR4W/hoIvyYYlR2/UeHIo9b4jNDtGvk1HPLDokG5lVlyDhnFOHK
-        oBsk8Olk1qoONLibMF1a+SAhqX/VqKjlgGZ7jSJAb9ehjtXORICnuUfXvAHVltf3
-        4wgztXsSFoEM37l2ZN9ib1Wpo3IAwiSAiZGNUvtJ95xDk1yo7LrXnbM59OX9PmAb
-        g3cCUL1Ry9gujl9wwaE6RmpsZebiWY2597ZNCsj00N3m2PdkaUm4/gwz1QsBAAoO
-        3qrenydLtgHYS6FPlTmi8L0XZzJRIm0CAwEAATANBgkqhkiG9w0BAQsFAAOCAQEA
-        NKgFZxHF7zcZNld+oJtNWXgDjCrPeLpzY6882US7AKpzE5TlCtGSO1yFnuKA1SjG
-        LdmO954SjMlK4dp628mQcISqrX8GP8lbOEFXlgUJzEjc3wbUHTahT+stbxRr6E8r
-        M3S6dXnDRDCuEUlWouymUpwS4rSANww3jWmZhpmqjmn1V3WtXOOIcu1pJIOXTNPk
-        lIsEg/+SsklDxNvqh34GgzwBe2qza3mIUt3VazOAvT14ZZ4mw2DnNqYMkEgX04SE
-        exlx1ox67CxfcHOQcYI8DOZQ4KsCYGb41kpgBIXPnQJe9ud0Zab1V+6Gfapk9WoR
-        KTC1AG7TV3czaB6XCx9m2w=='''
+        AQoCggEBAMYeyMm6GcT25UYFEn1ebG2tLw8BsRtTlxsPBSOQCBUHp2VI8nmAdBDn
+        sud1tbYvHize57fo1QylHwoOCyFT4Nft8rofLaM8SjMplAweePzIlF4qY2bGPsYd
+        8odVkJQiWj2L8QFjM5CmPbKyd7WytCqBn0/JPSp60fhOwbTGu3oZOfLJXUnNYlXd
+        0zmwIOspRk99DHYPemj/MQOh3VfHTOR4vBrU+ZLZGXeMOtXw6QKYhnsEvRgg92KW
+        3SbiBVjznN28V55kdA9z9kvXSmarM/oTp9fOmyd8mkGDz/0CJAW/WbcJwuJruiX4
+        ScHa1pEUbWaNh2z6YjiKV++ga4XvleECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEA
+        BuLLVLU3XCtpQKLuVAjgC5gOf5TaVz3d+05fj9Fi8Pm2hk5WwV+9gdsXR2ufd8Qo
+        dZ2PJnXxqjT/M/IduhEOG7PKkNo7UxHH8AoeMusQUCmFk0LjdbNteDGcpcfVGwzE
+        Qnmdu0ZpVcbnfPRN8DErj7P+Ceg4/2w//WzGnLWYUmQ07jOQEryBhavHHR6Dnd13
+        5dzpcxHn+VYEAZHqS7z0YKmd9sdq9Sv+wKh/OtpyYiZRQp9vGj04EQRrS/Ve4XPV
+        uNJgfCdUc7eRNh6d+2oVuwJ42RRJ2yoG0366/znXbn1kLflwujorogZdoZQXS6ah
+        lF6wVPSUQ29/efMu1/ZGsA=='''
 
 
 class CascadiaStudentIdp(IdpConfig):
