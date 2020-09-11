@@ -11,8 +11,7 @@ class CascadiaIdp(IdpConfig):
     #  CCFederationMetadata.xml IDPSSODescriptor/KeyDescriptor/signing
     entity_id = 'http://sts.cascadia.edu/adfs/services/trust'
     sso_url = 'https://sts.cascadia.edu/adfs/ls/'
-    _attribute_prefix = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims'
-    id_attribute = f'{_attribute_prefix}/employeeid'
+    id_attribute = 'employeeNumber'
     x509_cert = '''
         MIIC3DCCAcSgAwIBAgIQETHAaMN+jqRIinfeu9IgLjANBgkqhkiG9w0BAQsFADAq
         MSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2FkaWEuZWR1MB4XDTIw
