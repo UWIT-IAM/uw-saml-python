@@ -41,3 +41,10 @@ class UwIdp(IdpConfig):
 
 class UwIdpTwoFactor(UwIdp):
     two_factor = True
+
+class UwTestIdP(UwIdp):
+    entity_id = 'urn:mace:incommon:washington.edu:eval'
+    sso_url = 'https://idp-eval.u.washington.edu/idp/profile/SAML2/Redirect/SSO'
+
+class UwTestIdPTwoFactor(UwTestIdP):
+    two_factor = True
