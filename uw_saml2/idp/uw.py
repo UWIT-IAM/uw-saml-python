@@ -2,6 +2,15 @@
 from . import IdpConfig, attribute
 
 
+uwnetid_attribute_entities = []
+
+
+def inject_uwnetid_attribute(cls):
+    uwnetid_attribute_entities.append(cls.entity)
+    return cls
+
+
+@inject_uwnetid_attribute
 class UwIdp(IdpConfig):
     """UW's IdP. SP cert and key are not required"""
     entity_id = 'urn:mace:incommon:washington.edu'
@@ -39,6 +48,7 @@ class UwIdp(IdpConfig):
     }
 
 
+@inject_uwnetid_attribute
 class UwIdpTwoFactor(UwIdp):
     two_factor = True
 
