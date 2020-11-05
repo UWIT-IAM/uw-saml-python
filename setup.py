@@ -12,7 +12,6 @@ with open(os.path.join(BASE_DIR, 'README.md')) as f:
 saml_requires = ['python3-saml']
 tests_require = saml_requires + ['pytest', 'pytest-cov', 'mock', 'pycodestyle']
 
-
 setup(name='uw-saml',
       version=VERSION,
       url='https://github.com/UWIT-IAM/uw-saml-python',
