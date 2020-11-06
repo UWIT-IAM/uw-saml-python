@@ -50,3 +50,6 @@ class UwTestIdP(UwIdp):
 
 class UwTestIdPTwoFactor(UwTestIdP):
     two_factor = True
+
+
+uwnetid_attribute_entities = [UwIdp.entity_id, UwTestIdP.entity_id]

@@ -26,7 +26,7 @@ class SamlAuthenticator:
         post = self.request['post_data']
         remote_user = post.get('remote_user', '')
         attributes = {}
-        if post.get('idp') == uw.UwIdp.entity_id:
+        if post.get('idp') in uw.uwnetid_attribute_entities:
             uwnetid = remote_user.split('@washington.edu')[0]
             attributes['uwnetid'] = [uwnetid]
         elif post.get('idp') == federated.CollegenetIdp.entity_id:
