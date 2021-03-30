@@ -2,35 +2,6 @@
 from . import IdpConfig, attribute
 
 
-class CascadiaIdp(IdpConfig):
-    #  Added this class to address new Cascadia IdP.
-    #  Some parts may still need to be udpated.
-    #  entityID and sso_url from CCFederationMetadata.xml, from Cascadia.
-    #  _attribute_prefix, id_attribute from FredHutchAzureIdp(IdpConfig)
-    #  x509_cert from
-    #  CCFederationMetadata.xml IDPSSODescriptor/KeyDescriptor/signing
-    entity_id = 'http://sts.cascadia.edu/adfs/services/trust'
-    sso_url = 'https://sts.cascadia.edu/adfs/ls/'
-    id_attribute = 'employeeNumber'
-    x509_cert = '''
-        MIIC3DCCAcSgAwIBAgIQETHAaMN+jqRIinfeu9IgLjANBgkqhkiG9w0BAQsFADAq
-        MSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2FkaWEuZWR1MB4XDTIw
-        MDYxNDIxMzQwNVoXDTIxMDYxNDIxMzQwNVowKjEoMCYGA1UEAxMfQURGUyBTaWdu
-        aW5nIC0gc3RzLmNhc2NhZGlhLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
-        AQoCggEBAMYeyMm6GcT25UYFEn1ebG2tLw8BsRtTlxsPBSOQCBUHp2VI8nmAdBDn
-        sud1tbYvHize57fo1QylHwoOCyFT4Nft8rofLaM8SjMplAweePzIlF4qY2bGPsYd
-        8odVkJQiWj2L8QFjM5CmPbKyd7WytCqBn0/JPSp60fhOwbTGu3oZOfLJXUnNYlXd
-        0zmwIOspRk99DHYPemj/MQOh3VfHTOR4vBrU+ZLZGXeMOtXw6QKYhnsEvRgg92KW
-        3SbiBVjznN28V55kdA9z9kvXSmarM/oTp9fOmyd8mkGDz/0CJAW/WbcJwuJruiX4
-        ScHa1pEUbWaNh2z6YjiKV++ga4XvleECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEA
-        BuLLVLU3XCtpQKLuVAjgC5gOf5TaVz3d+05fj9Fi8Pm2hk5WwV+9gdsXR2ufd8Qo
-        dZ2PJnXxqjT/M/IduhEOG7PKkNo7UxHH8AoeMusQUCmFk0LjdbNteDGcpcfVGwzE
-        Qnmdu0ZpVcbnfPRN8DErj7P+Ceg4/2w//WzGnLWYUmQ07jOQEryBhavHHR6Dnd13
-        5dzpcxHn+VYEAZHqS7z0YKmd9sdq9Sv+wKh/OtpyYiZRQp9vGj04EQRrS/Ve4XPV
-        uNJgfCdUc7eRNh6d+2oVuwJ42RRJ2yoG0366/znXbn1kLflwujorogZdoZQXS6ah
-        lF6wVPSUQ29/efMu1/ZGsA=='''
-
-
 class CascadiaStudentIdp(IdpConfig):
     entity_id = 'https://idp.cascadia.edu/idp/shibboleth'
     sso_url = 'https://idp.student.cascadia.edu/idp/profile/SAML2/Redirect/SSO'
