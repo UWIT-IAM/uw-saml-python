@@ -13,22 +13,25 @@ class CascadiaIdp(IdpConfig):
     sso_url = 'https://sts.cascadia.edu/adfs/ls/'
     id_attribute = 'employeeNumber'
     x509_cert = '''
-        MIIC3DCCAcSgAwIBAgIQETHAaMN+jqRIinfeu9IgLjANBgkqhkiG9w0BAQsFADAq
-        MSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2FkaWEuZWR1MB4XDTIw
-        MDYxNDIxMzQwNVoXDTIxMDYxNDIxMzQwNVowKjEoMCYGA1UEAxMfQURGUyBTaWdu
-        aW5nIC0gc3RzLmNhc2NhZGlhLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
-        AQoCggEBAMYeyMm6GcT25UYFEn1ebG2tLw8BsRtTlxsPBSOQCBUHp2VI8nmAdBDn
-        sud1tbYvHize57fo1QylHwoOCyFT4Nft8rofLaM8SjMplAweePzIlF4qY2bGPsYd
-        8odVkJQiWj2L8QFjM5CmPbKyd7WytCqBn0/JPSp60fhOwbTGu3oZOfLJXUnNYlXd
-        0zmwIOspRk99DHYPemj/MQOh3VfHTOR4vBrU+ZLZGXeMOtXw6QKYhnsEvRgg92KW
-        3SbiBVjznN28V55kdA9z9kvXSmarM/oTp9fOmyd8mkGDz/0CJAW/WbcJwuJruiX4
-        ScHa1pEUbWaNh2z6YjiKV++ga4XvleECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEA
-        BuLLVLU3XCtpQKLuVAjgC5gOf5TaVz3d+05fj9Fi8Pm2hk5WwV+9gdsXR2ufd8Qo
-        dZ2PJnXxqjT/M/IduhEOG7PKkNo7UxHH8AoeMusQUCmFk0LjdbNteDGcpcfVGwzE
-        Qnmdu0ZpVcbnfPRN8DErj7P+Ceg4/2w//WzGnLWYUmQ07jOQEryBhavHHR6Dnd13
-        5dzpcxHn+VYEAZHqS7z0YKmd9sdq9Sv+wKh/OtpyYiZRQp9vGj04EQRrS/Ve4XPV
-        uNJgfCdUc7eRNh6d+2oVuwJ42RRJ2yoG0366/znXbn1kLflwujorogZdoZQXS6ah
-        lF6wVPSUQ29/efMu1/ZGsA=='''
+        MIIC3DCCAcSgAwIBAgIQPLOKuRD2zahHjLCHaRuOEjANBgkqhkiG9w0B
+        AQsFADAqMSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2Fk
+        aWEuZWR1MB4XDTIxMDUyNjA4MjIzMloXDTIyMDUyNjA4MjIzMlowKjEo
+        MCYGA1UEAxMfQURGUyBTaWduaW5nIC0gc3RzLmNhc2NhZGlhLmVkdTCC
+        ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMLu9Kw0B0GVCooM
+        RTT5WtuOztV53nZVF2K2SHljc5ZK1udiz3qg/BlYgn1hSdiaDL4BcbEo
+        u2umchIp8URGpJXAIDhNC7OM8D1MivRVxP1Ei7eG5/WwbTZVG0q4H4x6
+        +6AngadYoB5LIHRMcIdXnI7DZ0Py+v9imV8dWJgYFE8Umoz+RV2jmgMV
+        Y48hxodmG+h/N7IWwwgLX8bW2Cs2bt7F0/pXWBaGLgrFCj34QmA2Q4Xz
+        vcO0pSynpAyx8JiZWQnvWmCV4vnWB4wJ0hJRQTGVdbxiXlykaNU5+qJc
+        0Vc8rqrZ8FnrtTxrpjtlG8nbT3lE5YXclLZDVbLIZQaVCSECAwEAATAN
+        BgkqhkiG9w0BAQsFAAOCAQEAbxucel2+Nlrimq2b52dUtr2gg9vLj308
+        U234e2IEcxaey4m/e/Js7G/BhfiY13wGOqHTFLiOcMh16jkA0ZC7ywMx
+        UIKCLLzSL7aoGucVy3lsf4Rqv8Eom0oaVBkw/+cgvlE3cVllLNPxDkss
+        qE/XT8UUMstzOGqWb0FuNp3LAtTvLNqVaMKdUdXUtWsQDK+oquxD0l2U
+        tL+G0CMCkmJ/bahhsF4BJiMyL+MFO9BhrVEAojIhvwt04jpnlDqk7Md3
+        M831nGgl8YQuFBnjEwnl3MqpFsALuXIr1Lq7y0Cxc2Ky0EYvg+nvSnyd
+        UxxbKn1l6/GgtOys4W12hpx4KV2Hsg==
+    '''
 
 
 class CascadiaStudentIdp(IdpConfig):
