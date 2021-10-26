@@ -9,10 +9,10 @@ class CascadiaIdp(IdpConfig):
     #  _attribute_prefix, id_attribute from FredHutchAzureIdp(IdpConfig)
     #  x509_cert from
     #  CCFederationMetadata.xml IDPSSODescriptor/KeyDescriptor/signing
-    entity_id = 'http://sts.cascadia.edu/adfs/services/trust'
-    sso_url = 'https://sts.cascadia.edu/adfs/ls/'
-    id_attribute = 'employeeNumber'
-    x509_cert = '''
+    entity_id = "http://sts.cascadia.edu/adfs/services/trust"
+    sso_url = "https://sts.cascadia.edu/adfs/ls/"
+    id_attribute = "employeeNumber"
+    x509_cert = """
         MIIC3DCCAcSgAwIBAgIQPLOKuRD2zahHjLCHaRuOEjANBgkqhkiG9w0B
         AQsFADAqMSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2Fk
         aWEuZWR1MB4XDTIxMDUyNjA4MjIzMloXDTIyMDUyNjA4MjIzMlowKjEo
@@ -31,14 +31,14 @@ class CascadiaIdp(IdpConfig):
         tL+G0CMCkmJ/bahhsF4BJiMyL+MFO9BhrVEAojIhvwt04jpnlDqk7Md3
         M831nGgl8YQuFBnjEwnl3MqpFsALuXIr1Lq7y0Cxc2Ky0EYvg+nvSnyd
         UxxbKn1l6/GgtOys4W12hpx4KV2Hsg==
-    '''
+    """
 
 
 class CascadiaStudentIdp(IdpConfig):
-    entity_id = 'https://idp.cascadia.edu/idp/shibboleth'
-    sso_url = 'https://idp.student.cascadia.edu/idp/profile/SAML2/Redirect/SSO'
-    id_attribute = 'urn:mace:washington.edu:dir:attribute-def:stu-validationID'
-    x509_cert = '''
+    entity_id = "https://idp.cascadia.edu/idp/shibboleth"
+    sso_url = "https://idp.student.cascadia.edu/idp/profile/SAML2/Redirect/SSO"
+    id_attribute = "urn:mace:washington.edu:dir:attribute-def:stu-validationID"
+    x509_cert = """
         MIIDTDCCAjSgAwIBAgIVAKF/idZbWozYUUVYSAZqNtoPhTTpMA0GCSqGSIb3DQEB
         BQUAMCMxITAfBgNVBAMTGGlkcC5zdHVkZW50LmNhc2NhZGlhLmVkdTAeFw0wOTA3
         MTcxNzM0NDZaFw0yOTA3MTcxNzM0NDZaMCMxITAfBgNVBAMTGGlkcC5zdHVkZW50
@@ -56,7 +56,7 @@ class CascadiaStudentIdp(IdpConfig):
         mIKsRFjSA6we3sot0f/APiMqisieSLJHnd4Q7XXzt5ybBRSbDneEf0ukO+gqGHY2
         TlwHPe9Z73h1R5sQdLlSAUDH/UKm+5uWb0K+o7STppImd0Fs+fEInSIzZk7YpAG3
         v1S5a9uxu9q/jtCa5N49Dgu8H6p9dtqlVtU+v0ZQREpaLSxThI0gXMeDLhHKn+Oh
-        4evvj1ikdsX7XBiSpTNiUGMF0D7ZllSqTk+E+/Cyo5Q='''
+        4evvj1ikdsX7XBiSpTNiUGMF0D7ZllSqTk+E+/Cyo5Q="""
 
 
 class CascadiaEmployeeIdp(CascadiaStudentIdp):
@@ -64,12 +64,11 @@ class CascadiaEmployeeIdp(CascadiaStudentIdp):
     The only difference between an Cascadia Employee and a Student are the
     IdP's endpoint. Even the id_attribute of 'stu-validationID' remains.
     """
-    _idp_url = 'https://idp.employee.cascadia.edu'
-    _attribute_prefix = 'urn:mace:washington.edu:dir:attribute-def'
-    sso_url = f'{_idp_url}/idp/profile/SAML2/Redirect/SSO'
-    attribute_map = {
-        f'{_attribute_prefix}:emp-validationID': 'remote_user'
-    }
+
+    _idp_url = "https://idp.employee.cascadia.edu"
+    _attribute_prefix = "urn:mace:washington.edu:dir:attribute-def"
+    sso_url = f"{_idp_url}/idp/profile/SAML2/Redirect/SSO"
+    attribute_map = {f"{_attribute_prefix}:emp-validationID": "remote_user"}
 
 
 class CollegenetIdp(IdpConfig):
@@ -77,17 +76,16 @@ class CollegenetIdp(IdpConfig):
     One thing of note about collegenet is that it encrypts attributes and thus
     requires an SP cert and key.
     """
-    _idp_url = 'https://shibboleth-idp.collegenet.com'
-    entity_id = f'{_idp_url}/idp/shibboleth'
-    sso_url = f'{_idp_url}/idp/profile/SAML2/Redirect/SSO'
+
+    _idp_url = "https://shibboleth-idp.collegenet.com"
+    entity_id = f"{_idp_url}/idp/shibboleth"
+    sso_url = f"{_idp_url}/idp/profile/SAML2/Redirect/SSO"
     # persistent id
-    id_attribute = 'urn:oid:1.3.6.1.4.1.5923.1.1.1.10'
-    mapped_id_attribute = attribute.NestedNameid('remote_user')
-    _attribute_prefix = 'https://applyweb.collegenet.com/account/attribute-def'
-    attribute_map = {
-        f'{_attribute_prefix}/act-userId': 'collegenet_userid'
-    }
-    x509_cert = '''
+    id_attribute = "urn:oid:1.3.6.1.4.1.5923.1.1.1.10"
+    mapped_id_attribute = attribute.NestedNameid("remote_user")
+    _attribute_prefix = "https://applyweb.collegenet.com/account/attribute-def"
+    attribute_map = {f"{_attribute_prefix}/act-userId": "collegenet_userid"}
+    x509_cert = """
         MIIDYDCCAkigAwIBAgIUE7bIe4hwDfwhSM8wn4E8Rza/AdEwDQYJKoZIhvcNAQEF
         BQAwKDEmMCQGA1UEAxMdc2hpYmJvbGV0aC1pZHAuY29sbGVnZW5ldC5jb20wHhcN
         MTAwMjExMjMxNTMyWhcNMzAwMjExMjMxNTMyWjAoMSYwJAYDVQQDEx1zaGliYm9s
@@ -106,13 +104,13 @@ class CollegenetIdp(IdpConfig):
         cURaOv4usFw8sWMQg0oM3rHC5VbTCCoQbmiRGiMCIqSEJbZ02JG+lUhrv1jp9xNj
         PjDjvSkxTTH3Mo4Lt7jVww76pgWRDa8L0eZ4sOREQVqMXEMcB3JNy7fFimunvxgw
         fIJN0Yk9uqeMFBoZiL8r0itI9BTt4gk2sYDbNnG6/pqoPS9mwmiM22XEeTeG1x3a
-        WWeBDw=='''
+        WWeBDw=="""
 
 
 class FredHutchIdp(IdpConfig):
-    entity_id = 'https://shib.fhcrc.org/idp/shibboleth'
-    sso_url = 'https://shib.fhcrc.org/idp/profile/SAML2/Redirect/SSO'
-    x509_cert = '''
+    entity_id = "https://shib.fhcrc.org/idp/shibboleth"
+    sso_url = "https://shib.fhcrc.org/idp/profile/SAML2/Redirect/SSO"
+    x509_cert = """
         MIIDIzCCAgugAwIBAgIUYqaDH2PjPdZ38g8PPuq3hjmdVQswDQYJKoZIhvcNAQEF
         BQAwGTEXMBUGA1UEAxMOc2hpYi5maGNyYy5vcmcwHhcNMTEwMjIzMjMzNDEwWhcN
         MzEwMjIzMjMzNDEwWjAZMRcwFQYDVQQDEw5zaGliLmZoY3JjLm9yZzCCASIwDQYJ
@@ -129,7 +127,7 @@ class FredHutchIdp(IdpConfig):
         jJr8GY4oXUUPGAJpRi5Ly6UKTQKEAHvBdsq6JQQqRLYN5yO1f2lr+QHnizs8rS5a
         +3dB0vs3YxYy1OqKzBLaCH13QkZClNBl87/62OLpnpEm6tAOSiWsD/4unPe2kOW5
         19aqTzwjsV2Am2OINyXSKUK1yA6B5nv9LUzO2ESIH9A06DOYlXWch6u7a0b+3URk
-        //e64IUXSJ1NqLsVrX68mC2ysMMojbRiOdmV9mPUcpizb0devpvc'''
+        //e64IUXSJ1NqLsVrX68mC2ysMMojbRiOdmV9mPUcpizb0devpvc"""
 
 
 class FredHutchAzureIdp(IdpConfig):
@@ -137,21 +135,21 @@ class FredHutchAzureIdp(IdpConfig):
     Azure doesn't do things the Shibboleth way and FredHutch isn't
     acustomed to using ePPN
     """
-    _azure_tenant_id = '0054a3ea-b394-418b-ad1a-174138231fd6'
-    _attribute_prefix = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims'
-    _attribute_prefix2 = 'http://schemas.microsoft.com/identity/claims'
 
-    entity_id = f'https://sts.windows.net/{_azure_tenant_id}/'
-    sso_url = f'https://login.microsoftonline.com/{_azure_tenant_id}/saml2'
-    id_attribute = f'{_attribute_prefix}/employeeid'
+    _azure_tenant_id = "0054a3ea-b394-418b-ad1a-174138231fd6"
+    _attribute_prefix = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims"
+    _attribute_prefix2 = "http://schemas.microsoft.com/identity/claims"
+
+    entity_id = f"https://sts.windows.net/{_azure_tenant_id}/"
+    sso_url = f"https://login.microsoftonline.com/{_azure_tenant_id}/saml2"
+    id_attribute = f"{_attribute_prefix}/employeeid"
     attribute_map = {
-        f'{_attribute_prefix}/name': 'saml_unique_name',
-        f'{_attribute_prefix2}/objectidentifier': 'saml_oid',
-        f'{_attribute_prefix2}/displayname': 'saml_displayname',
-        f'{_attribute_prefix2}/authnmethodsreferences':
-        'saml_authncontextclassref'
+        f"{_attribute_prefix}/name": "saml_unique_name",
+        f"{_attribute_prefix2}/objectidentifier": "saml_oid",
+        f"{_attribute_prefix2}/displayname": "saml_displayname",
+        f"{_attribute_prefix2}/authnmethodsreferences": "saml_authncontextclassref",
     }
-    x509_cert = '''
+    x509_cert = """
         MIIC8DCCAdigAwIBAgIQGB680XRFNZhCkepWMRYORjANBgkqhkiG9w0BAQsFADA0
         MTIwMAYDVQQDEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZp
         Y2F0ZTAeFw0yMDAxMjExNjI2NDhaFw0yMzAxMjExNjI2NDhaMDQxMjAwBgNVBAMT
@@ -167,11 +165,11 @@ class FredHutchAzureIdp(IdpConfig):
         mj64tz3btsQrxrJcs2vgrsG3S8oqR3PHGgbAKcoQt6wuX2e0/nf9ZJ+Do/hRQGtL
         lyFsgAW1axDowtLY3Sp8dkRrBlJ6mhMCjfmjgBBiMjRl828nlGJHKiGCdpHh5DSc
         zU0jc67sDs3f04ZzM5F+QZcpjQEOtx6oZOfsLuLZoYhJr/nEPwloY+qIStIBgs7H
-        Lci0jyi4EVo6rEh/3JMAnw3mUs2e5naG9j/5Uzvp6crN6gdN'''
+        Lci0jyi4EVo6rEh/3JMAnw3mUs2e5naG9j/5Uzvp6crN6gdN"""
 
 
 class SccaIdp(IdpConfig):
-    x509_cert = '''
+    x509_cert = """
         MIIGFzCCBP+gAwIBAgITHQAAAV+l62jdEnLx3AAAAAABXzANBgkqhkiG9w0BAQsF
         ADCB9TELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExDzANBgNVBAcT
         BklydmluZTEfMB0GA1UEChMWU2VjdXJlQXV0aCBDb3Jwb3JhdGlvbjFCMEAGA1UE
@@ -204,7 +202,7 @@ class SccaIdp(IdpConfig):
         NI9ciJ/x8UWMXooYM9il1242T9r+DD+0q5AZhOemhu9iEN2++XzDCZGZLAITNhjo
         5tM6OvHr6xo0Fmr03B11Wwhybgf9ItcFyq14rcwnCQ9/U/p6/jEtYFRUx++a/lZO
         ef3aY+ojRtKVvv0ZaS35cz5lHgVepD0xP/djCj1Uy73JPOkYjuNpq8WsJudj38dC
-        4+1iVLOGVJk7934mItYZeFg2VStjumSp830k'''
+        4+1iVLOGVJk7934mItYZeFg2VStjumSp830k"""
 
     def __init__(self, entity_id):
         """This varies by environment and is equivalent to the acs url."""
@@ -213,10 +211,10 @@ class SccaIdp(IdpConfig):
 
 
 class TestIdp(IdpConfig):
-    _idp_url = 'https://thor-idp.cac.washington.edu'
-    entity_id = f'{_idp_url}/idp/shibboleth'
-    sso_url = f'{_idp_url}/idp/profile/SAML2/Redirect/SSO'
-    x509_cert = '''
+    _idp_url = "https://thor-idp.cac.washington.edu"
+    entity_id = f"{_idp_url}/idp/shibboleth"
+    sso_url = f"{_idp_url}/idp/profile/SAML2/Redirect/SSO"
+    x509_cert = """
         MIIDVzCCAj+gAwIBAgIUedVWX+JQX04XEack4w0QDiIDGlQwDQYJKoZIhvcNAQEL
         BQAwJjEkMCIGA1UEAwwbdGhvci1pZHAuY2FjLndhc2hpbmd0b24uZWR1MB4XDTE4
         MDEwMzE2MDY0MFoXDTM4MDEwMzE2MDY0MFowJjEkMCIGA1UEAwwbdGhvci1pZHAu
@@ -234,4 +232,4 @@ class TestIdp(IdpConfig):
         J4Yj4lhvDXEb7wPPR1/3xWSaMPFFqNHpqqDp5x1Wq7h7MYc/Pq8ApNTISvtnKar8
         vPEek8lr1WxNQfLgaSUyb3uHOCAaQQnLCQzfQGSpqwcn3OsLxfFP5a0jdcXGNPwg
         Ul/zCgXGtpqj0pgaGKncgEwAX/CItsqUmnia58mMAzUQfbEtawSBw8QztBh1uJ/J
-        szamvpcczUDLghpfj8byPjyTBIWAeJFVfmOJRsob+NcspvuZXMcKd8o+RQ=='''
+        szamvpcczUDLghpfj8byPjyTBIWAeJFVfmOJRsob+NcspvuZXMcKd8o+RQ=="""
