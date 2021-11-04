@@ -1,0 +1,16 @@
+on:
+  pull_request:
+    types:
+      - labeled
+      - synchronize
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: uwit-iam/actions/require-semver-guidance-label@0.1.8
+        with:
+          github-token: ${{ github.token }}
+        id: guidance
+      - run: ./scripts/pre-push.sh --check-only

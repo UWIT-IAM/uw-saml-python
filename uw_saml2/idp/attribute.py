@@ -19,6 +19,7 @@ def map(attribute_data, idp):
 
 class Attribute:
     """Base class for mapping a list of attribute values."""
+
     def __init__(self, name):
         self.name = name
 
@@ -31,13 +32,15 @@ class Attribute:
 
 class List(Attribute):
     """An attribute key whose values should be returned as a list."""
+
     def map(self, values):
         return values[:]
 
 
 class UWGroups(List):
     """An attribute that splits out the common UW Groups prefix."""
-    prefix = 'urn:mace:washington.edu:groups:'
+
+    prefix = "urn:mace:washington.edu:groups:"
 
     def map(self, values):
         results = []
@@ -50,7 +53,8 @@ class UWGroups(List):
 
 class NestedNameid(Attribute):
     """An attribute that's an object of a NameId structure."""
+
     def map(self, values):
         if not values:
             return None
-        return values[0].get('NameID', {}).get('value')
+        return values[0].get("NameID", {}).get("value")

@@ -1,8 +1,5 @@
 # uw-saml
 
-[![Build Status](https://travis-ci.org/UWIT-IAM/uw-saml-python.svg?branch=master)](https://travis-ci.org/UWIT-IAM/uw-saml-python)
-[![Coverage Status](https://coveralls.io/repos/github/UWIT-IAM/uw-saml-python/badge.svg?branch=master)](https://coveralls.io/github/UWIT-IAM/uw-saml-python?branch=master)
-
 A UW-specific adapter to the
 [python3-saml](https://github.com/onelogin/python3-saml) package. This package
 was built to federate with other IdPs, but the default case is to use the UW
@@ -22,6 +19,18 @@ library. Therefore, it's an optional requirement, causing a runtime error
 instead of an install-time error. Alternatively, you can use a mock
 interface by setting `uw_saml2.python3_saml.MOCK = True`.
 
+If you are able to run your app as a Docker container, you can base your image on
+[ghcr.io/uwit-iam/uw-saml-poetry:latest](https://ghcr.io/uwit-iam/uw-saml-poetry:latest)
+which comes with all dependencies pre-installed. Here is an example. Note that you 
+don't have to use poetry in your install process to use this image.
+
+```
+FROM ghcr.io/uwit-iam/uw-saml-poetry:latest AS dependencies
+RUN pip install flask uw-saml  # uw-saml and python3-saml are already installed!
+COPY app.py ./
+CMD flask run app
+```
+
 ## Example login endpoint using flask
 
 In this example you've gone to
@@ -34,6 +43,8 @@ Response.
 ```python
 from flask import request, session, redirect
 import uw_saml2
+
+app = Flask(__name__)
 
 @app.route('/saml/login', methods=['GET', 'POST'])
 def login():
@@ -88,3 +99,44 @@ uw_saml2.auth.CACHE = werkzeug.contrib.cache.RedisCache()
 ```
 
 Django's cache backend uses the same methods so that could be injected as well.
+
+# Developers
+
+## Maintenance
+
+People who are developing this package should have either [poetry] or a docker daemon
+installed. This is so that you can run validations before pushing your code.
+
+### Using docker (recommended)
+
+This is recommended because this is the script the CI pipeline uses,
+so if this works for you, it ought to work in the pipeline, too!
+
+```
+./scripts/pre-push.sh
+```
+
+### Using poetry
+
+Running directly is helpful when you want to attach debuggers, etc.
+
+```
+poetry install
+poetry run pytest
+poetry run black uw_saml2 tests
+```
+
+
+## Pull Requests
+
+When creating a pull request for this repository, a `semver-guidance` label must be 
+applied to the PR. If you do not have write access, a reviewer must do this for 
+you.
+
+Use the following guidelines to select a version level for your change: 
+
+- `no-bump` if the change is only for documentation, CI workflow, etc.
+- `patch` if the change is a simple update or bugfix (e.g., idp metadata update, 
+  certificate renewal, etc.), or if dependencies are updated (`poetry.lock` changes)
+- `minor` if new features are added or deprecated but the change is backwards-compatible
+- `major` if the change is not backwards compatible and will break consumers
