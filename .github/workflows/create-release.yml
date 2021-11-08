@@ -1,0 +1,110 @@
+name: Release new version of uw-saml-python
+
+on:
+  push:
+    branches:
+      - main
+      - test-release-workflow
+
+env:
+  workflow_url: >
+    https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+  dry_run: ${{ github.ref != 'refs/heads/main' }}
+  SLACK_BOT_TOKEN: ${{ secrets.ACTIONS_SLACK_BOT_TOKEN }}
+  GCLOUD_TOKEN: ${{ secrets.GCR_TOKEN }}
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: abatilo/actions-poetry@v2.1.4
+      - with:
+          project_id: ${{ secrets.IAM_GCR_REPO }}
+          service_account_key: ${{ env.GCLOUD_TOKEN }}
+          export_default_credentials: true
+        uses: google-github-actions/setup-gcloud@v0.2.1
+
+      - run: |
+          echo "::set-output name=version::$(poetry version -s)
+          echo "::set-output name=short-sha::${${{ github.sha }}:0:10
+        id: configure
+
+      - uses: UWIT-IAM/actions/set-up-slack-notification-canvas@0.1.8
+        with:
+          json: >
+            {
+              "description": "${{ github.workflow }}",
+              "status": "in progress",
+              "channel": "#iam-bots",
+              "steps": [
+                {
+                  "description": "Configure <${{ env.workflow_url }} | workflow>",
+                  "status": "succeeded",
+                  "stepId": "configure"
+                },
+                {
+                  "description": "Run tests",
+                  "status": "in progress",
+                  "stepId": "run-tests"
+                },
+                {
+                  "description": "Release version ${{ steps.configure.outputs.version }}",
+                  "stepId": "release"
+                }
+              ]
+            }
+
+      - uses: UWIT-IAM/actions/update-slack-workflow-canvas@main
+        env:
+          commit_url: >
+            https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+        with:
+          command: add-artifact
+          description: >
+            <${{ env.workflow_url }} | Workflow> triggered by ${{ github.actor }}
+            from a ${{ github.event_name }} at
+            <${{ env.commit_url }} | commit ${{ steps.configure.outputs.short-sha }}>
+
+      - run: ./scripts/pre-push.sh --check-only
+        id: run-tests
+
+      - if: always()
+        uses: UWIT-IAM/actions/update-slack-workflow-canvas@main
+        env:
+          test-status: ${{ steps.run-tests.outcome == 'success' && 'succeeded' || 'failed' }}
+          release-status: ${{ steps.run-tests.outcome == 'success' && 'in progress' || 'not started' }}
+        with:
+          command: update-workflow
+          step-id: run-tests, release
+          step-status: ${{ env.test-status }}, ${{ env.release-status }}
+
+      - uses: ncipollo/release-action@v1.8.6
+        if: ${{ ! env.dry_run }}
+        id: create-release
+        with:
+          token: ${{ github.token }}
+          commit: ${{ github.sha }}
+          tag: ${{ steps.configure.outputs.version }}
+
+      - uses: UWIT-IAM/actions/update-slack-workflow-canvas@main
+        env:
+          release_version: ${{ steps.configure.outputs.version }}
+          release_url: ${{ steps.create-release.outputs.html_url || 'https://www.example.com' }}
+          action_desc: ${{ env.dry_run == 'true' && 'Dry-run for' || 'Published' }}
+        with:
+          command: add-artifact
+          description: >
+            ${{ env.action_desc }} release
+            <${{ env.release_url }} | ${{ env.release_version }}>
+
+      - run: |
+          poetry publish \
+            --build \
+            $(test "${{ env.dry_run }}" == "false" || echo "--dry-run")
+        id: publish-release
+
+      - if: always()
+        uses: UWIT-IAM/actions/finalize-slack-notification-canvas@0.1.8
+        with:
+          workflow-status: ${{ job.status == 'failure' && 'failed' || 'succeeded' }}
