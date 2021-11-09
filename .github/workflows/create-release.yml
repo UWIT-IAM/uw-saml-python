@@ -19,6 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: abatilo/actions-poetry@v2.1.4
+      - run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
       - with:
           project_id: ${{ secrets.IAM_GCR_REPO }}
           service_account_key: ${{ env.GCLOUD_TOKEN }}
@@ -27,14 +28,17 @@ jobs:
 
       - run: |
           echo "::set-output name=version::$(poetry version -s)"
-          echo "::set-output name=short-sha::${${{ github.sha }}:0:10}"
+          echo "::set-output name=short-sha::${GITHUB_SHA:0:10}"
         id: configure
 
       - uses: UWIT-IAM/actions/set-up-slack-notification-canvas@0.1.8
+        id: create-canvas
+        env:
+          description_prefix: ${{ env.dry_run && '[DRY RUN] ' || '' }}
         with:
           json: >
             {
-              "description": "${{ github.workflow }}",
+              "description": "${{ env.description_prefix }}${{ github.workflow }}",
               "status": "in progress",
               "channel": "#iam-bots",
               "steps": [
@@ -55,7 +59,8 @@ jobs:
               ]
             }
 
-      - uses: UWIT-IAM/actions/update-slack-workflow-canvas@main
+      - uses: UWIT-IAM/actions/update-slack-workflow-canvas@0.1.8
+        if: steps.create-canvas.outputs.canvas-id
         env:
           commit_url: >
             https://github.com/${{ github.repository }}/commit/${{ github.sha }}
@@ -69,8 +74,8 @@ jobs:
       - run: ./scripts/pre-push.sh --check-only
         id: run-tests
 
-      - if: always()
-        uses: UWIT-IAM/actions/update-slack-workflow-canvas@main
+      - if: always() && steps.create-canvas.outputs.canvas-id
+        uses: UWIT-IAM/actions/update-slack-workflow-canvas@0.1.8
         env:
           test-status: ${{ steps.run-tests.outcome == 'success' && 'succeeded' || 'failed' }}
           release-status: ${{ steps.run-tests.outcome == 'success' && 'in progress' || 'not started' }}
@@ -87,7 +92,8 @@ jobs:
           commit: ${{ github.sha }}
           tag: ${{ steps.configure.outputs.version }}
 
-      - uses: UWIT-IAM/actions/update-slack-workflow-canvas@main
+      - uses: UWIT-IAM/actions/update-slack-workflow-canvas@0.1.8
+        if: success() && steps.create-canvas.outputs.canvas-id
         env:
           release_version: ${{ steps.configure.outputs.version }}
           release_url: ${{ steps.create-release.outputs.html_url || 'https://www.example.com' }}
@@ -97,14 +103,14 @@ jobs:
           description: >
             ${{ env.action_desc }} release
             <${{ env.release_url }} | ${{ env.release_version }}>
-
       - run: |
+          set -x
           poetry publish \
             --build \
             $(test "${{ env.dry_run }}" == "false" || echo "--dry-run")
         id: publish-release
 
-      - if: always()
+      - if: always() && steps.create-canvas.outputs.canvas-id
         uses: UWIT-IAM/actions/finalize-slack-notification-canvas@0.1.8
         with:
           workflow-status: ${{ job.status == 'failure' && 'failed' || 'succeeded' }}
