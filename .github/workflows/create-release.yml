@@ -26,7 +26,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0.2.1
 
       - run: |
-          echo "::set-output name=version::$(poetry version -s)
+          echo "::set-output name=version::$(poetry version -s)"
           echo "::set-output name=short-sha::${${{ github.sha }}:0:10}"
         id: configure
 
