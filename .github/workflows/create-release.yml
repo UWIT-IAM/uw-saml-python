@@ -27,7 +27,7 @@ jobs:
 
       - run: |
           echo "::set-output name=version::$(poetry version -s)
-          echo "::set-output name=short-sha::${${{ github.sha }}:0:10
+          echo "::set-output name=short-sha::${${{ github.sha }}:0:10}"
         id: configure
 
       - uses: UWIT-IAM/actions/set-up-slack-notification-canvas@0.1.8
