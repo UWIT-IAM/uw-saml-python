@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: uwit-iam/actions/require-semver-guidance-label@0.1.8
+      - uses: uwit-iam/actions/require-semver-guidance-label@0.1
         with:
           github-token: ${{ github.token }}
         id: guidance
-      - uses: uwit-iam/actions/update-pr-branch-version@0.1.8
+      - uses: uwit-iam/actions/update-pr-branch-version@0.1
         with:
           github-token: ${{ github.token }}
           version-guidance: ${{ steps.guidance.output.guidance }}
