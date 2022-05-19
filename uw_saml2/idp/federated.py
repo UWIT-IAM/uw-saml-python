@@ -33,6 +33,7 @@ class CascadiaIdp(IdpConfig):
         krm7bWjDEu8/wRKVz894pKIC/oiklg==
     """
 
+
 class CollegenetIdp(IdpConfig):
     """
     One thing of note about collegenet is that it encrypts attributes and thus
