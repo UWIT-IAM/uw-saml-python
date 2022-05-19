@@ -13,63 +13,25 @@ class CascadiaIdp(IdpConfig):
     sso_url = "https://sts.cascadia.edu/adfs/ls/"
     id_attribute = "employeeNumber"
     x509_cert = """
-        MIIC3DCCAcSgAwIBAgIQPLOKuRD2zahHjLCHaRuOEjANBgkqhkiG9w0B
+        MIIC3DCCAcSgAwIBAgIQXrfPPZMKPYlC3T8Lh+ONhDANBgkqhkiG9w0B
         AQsFADAqMSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2Fk
-        aWEuZWR1MB4XDTIxMDUyNjA4MjIzMloXDTIyMDUyNjA4MjIzMlowKjEo
+        aWEuZWR1MB4XDTIyMDUwNjA5MjkwMloXDTIzMDUwNjA5MjkwMlowKjEo
         MCYGA1UEAxMfQURGUyBTaWduaW5nIC0gc3RzLmNhc2NhZGlhLmVkdTCC
-        ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMLu9Kw0B0GVCooM
-        RTT5WtuOztV53nZVF2K2SHljc5ZK1udiz3qg/BlYgn1hSdiaDL4BcbEo
-        u2umchIp8URGpJXAIDhNC7OM8D1MivRVxP1Ei7eG5/WwbTZVG0q4H4x6
-        +6AngadYoB5LIHRMcIdXnI7DZ0Py+v9imV8dWJgYFE8Umoz+RV2jmgMV
-        Y48hxodmG+h/N7IWwwgLX8bW2Cs2bt7F0/pXWBaGLgrFCj34QmA2Q4Xz
-        vcO0pSynpAyx8JiZWQnvWmCV4vnWB4wJ0hJRQTGVdbxiXlykaNU5+qJc
-        0Vc8rqrZ8FnrtTxrpjtlG8nbT3lE5YXclLZDVbLIZQaVCSECAwEAATAN
-        BgkqhkiG9w0BAQsFAAOCAQEAbxucel2+Nlrimq2b52dUtr2gg9vLj308
-        U234e2IEcxaey4m/e/Js7G/BhfiY13wGOqHTFLiOcMh16jkA0ZC7ywMx
-        UIKCLLzSL7aoGucVy3lsf4Rqv8Eom0oaVBkw/+cgvlE3cVllLNPxDkss
-        qE/XT8UUMstzOGqWb0FuNp3LAtTvLNqVaMKdUdXUtWsQDK+oquxD0l2U
-        tL+G0CMCkmJ/bahhsF4BJiMyL+MFO9BhrVEAojIhvwt04jpnlDqk7Md3
-        M831nGgl8YQuFBnjEwnl3MqpFsALuXIr1Lq7y0Cxc2Ky0EYvg+nvSnyd
-        UxxbKn1l6/GgtOys4W12hpx4KV2Hsg==
+        ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALNtzF2VwFEaKpsp
+        H0AmNQHy3rx23wd3bj3NvwsfyHafydWxxivu9oOLne4MMzB1I20NvEN9
+        Jw5gB9n+gBPB4K8njsHtBESUoy6wFPj4V+kYDpHJmX9xuIP1rG0OZ/X8
+        8uYbImnN1//dDPR6WFg65VBs9TWF4pxFXMnPmAqV7kgVIJhZfbA3Dmfc
+        1SzIoA/YGQ2bOuXktN2ZOiRcYgtmR3W1yFepcGotL616gWANRa6qg85t
+        ReKde3286HE3MFBXa1lM2i2fDpYkwQuZVsXVKZiRyCYepTW6Y+zvZzDT
+        jqqOSU++wSJj32nz2XqYeKhk89FljDgNWNUEh3bE8NwuQIUCAwEAATAN
+        BgkqhkiG9w0BAQsFAAOCAQEAm3AYm9qdrh2EKK7+8JVXysx90OS+rz+o
+        MGtGKDwPK9SLCx56wcyMF+332hNrHgA3+RmZCndUjSaap2xdoA5Ubn1V
+        SNWAZR4ERcinhojIJntKEUtPkE3GoBdr2Ta7xC6kiI+bt3R5/yLQ/1AU
+        w8vQoMv6LEYGZ82zRihwVo5SfAc/TxvjNYAMrF5YPj1OHCEKXJITnf5v
+        ChARq3CysO6F1oY/yxBT9VeHvqWYQc9eWIeUwVflBsl6QWRi6kjv3ezQ
+        xPUjFRIVJr31JLd7h3eI4AGCDiuZP0Ro8xrxJOObcKMPdBE6PkT+q8JA
+        krm7bWjDEu8/wRKVz894pKIC/oiklg==
     """
-
-
-class CascadiaStudentIdp(IdpConfig):
-    entity_id = "https://idp.cascadia.edu/idp/shibboleth"
-    sso_url = "https://idp.student.cascadia.edu/idp/profile/SAML2/Redirect/SSO"
-    id_attribute = "urn:mace:washington.edu:dir:attribute-def:stu-validationID"
-    x509_cert = """
-        MIIDTDCCAjSgAwIBAgIVAKF/idZbWozYUUVYSAZqNtoPhTTpMA0GCSqGSIb3DQEB
-        BQUAMCMxITAfBgNVBAMTGGlkcC5zdHVkZW50LmNhc2NhZGlhLmVkdTAeFw0wOTA3
-        MTcxNzM0NDZaFw0yOTA3MTcxNzM0NDZaMCMxITAfBgNVBAMTGGlkcC5zdHVkZW50
-        LmNhc2NhZGlhLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKsC
-        6uf6XGhfUYhypRK7BNXr9df4phb1pAISvXXGvICQB/iABP40fbMgk1+RVwjTVXj2
-        40JBlmYiHZ69Gcwv6GyIhbouNTb46k5Pp/bmU3K0oqwWHjbE68CyHS5IxRPImAlR
-        OeTFI4LFNvnNvZPb7uRhYAg1EgmJXjwscUqssNCmXozesHwM7vEjv/6jfeQ2RLB3
-        q2QVVuMEcFYh21+lNY07HmKkxBFSifHu2qKyVpLK7CWd8Qsj7v6cy/ixEc9VJdBJ
-        ptridTi2zcv33E4hZGrCvwWjdwPt/evOGOY7umUzOokbT6tqPFTUAmdlEeJKAdyv
-        FXVki+85jyJm0xg3FkkCAwEAAaN3MHUwVAYDVR0RBE0wS4IYaWRwLnN0dWRlbnQu
-        Y2FzY2FkaWEuZWR1hi9odHRwczovL2lkcC5zdHVkZW50LmNhc2NhZGlhLmVkdS9p
-        ZHAvc2hpYmJvbGV0aDAdBgNVHQ4EFgQUtK4D0urHY0BSPPxibiQcjWlp0YkwDQYJ
-        KoZIhvcNAQEFBQADggEBAGzAU57okBkfeaRUC1lnOXbjNfX/+XRTBY6dWLhlwxmK
-        zJ4yosaCHD6XsXuDwlVOeu0Ms38tvTakGlmLiJ644PKJVfrQeVRY22EKEJnpHMl5
-        mIKsRFjSA6we3sot0f/APiMqisieSLJHnd4Q7XXzt5ybBRSbDneEf0ukO+gqGHY2
-        TlwHPe9Z73h1R5sQdLlSAUDH/UKm+5uWb0K+o7STppImd0Fs+fEInSIzZk7YpAG3
-        v1S5a9uxu9q/jtCa5N49Dgu8H6p9dtqlVtU+v0ZQREpaLSxThI0gXMeDLhHKn+Oh
-        4evvj1ikdsX7XBiSpTNiUGMF0D7ZllSqTk+E+/Cyo5Q="""
-
-
-class CascadiaEmployeeIdp(CascadiaStudentIdp):
-    """
-    The only difference between an Cascadia Employee and a Student are the
-    IdP's endpoint. Even the id_attribute of 'stu-validationID' remains.
-    """
-
-    _idp_url = "https://idp.employee.cascadia.edu"
-    _attribute_prefix = "urn:mace:washington.edu:dir:attribute-def"
-    sso_url = f"{_idp_url}/idp/profile/SAML2/Redirect/SSO"
-    attribute_map = {f"{_attribute_prefix}:emp-validationID": "remote_user"}
-
 
 class CollegenetIdp(IdpConfig):
     """
@@ -105,29 +67,6 @@ class CollegenetIdp(IdpConfig):
         PjDjvSkxTTH3Mo4Lt7jVww76pgWRDa8L0eZ4sOREQVqMXEMcB3JNy7fFimunvxgw
         fIJN0Yk9uqeMFBoZiL8r0itI9BTt4gk2sYDbNnG6/pqoPS9mwmiM22XEeTeG1x3a
         WWeBDw=="""
-
-
-class FredHutchIdp(IdpConfig):
-    entity_id = "https://shib.fhcrc.org/idp/shibboleth"
-    sso_url = "https://shib.fhcrc.org/idp/profile/SAML2/Redirect/SSO"
-    x509_cert = """
-        MIIDIzCCAgugAwIBAgIUYqaDH2PjPdZ38g8PPuq3hjmdVQswDQYJKoZIhvcNAQEF
-        BQAwGTEXMBUGA1UEAxMOc2hpYi5maGNyYy5vcmcwHhcNMTEwMjIzMjMzNDEwWhcN
-        MzEwMjIzMjMzNDEwWjAZMRcwFQYDVQQDEw5zaGliLmZoY3JjLm9yZzCCASIwDQYJ
-        KoZIhvcNAQEBBQADggEPADCCAQoCggEBAJDWhNtMACDyyVwdEn7ZTt4teMurPpIQ
-        0QAnJB8A/VBo15/kkGQl6GKnjVT0yuXM9iRurwwbDh1nwhIaDX1kVqBCBueu4wh1
-        cceN1U+w5mhhWr37jc6hvml9vf/m/2GJcXyOEeneNOf5yo3Lvia4ueoW0qLAbsTr
-        36fYe8M1pa0AAudhpqUXDWdlXTfZdkPomufVVef6YpEVpJXxKezaF5BAYeyjAJ+k
-        vrIxZXIxghjoFDHkTdf536YAxj23HHp0aUciL2r+QgGhho9i6LRAnMFce5HESL/G
-        lIwHJLgvDgozCyw42kEPjQCwU7qBfnY33nmjBHLhw34sFZ1ElMOGbWMCAwEAAaNj
-        MGEwQAYDVR0RBDkwN4IOc2hpYi5maGNyYy5vcmeGJWh0dHBzOi8vc2hpYi5maGNy
-        Yy5vcmcvaWRwL3NoaWJib2xldGgwHQYDVR0OBBYEFH2yMS2n85KB2MuYt1flMZt4
-        rhJLMA0GCSqGSIb3DQEBBQUAA4IBAQAK8eF4qh4l1cMY3X9v3+TN2+Ld+CkowKp/
-        ALkr81YRVui4tbMOZ7yQs5WdEY3J4QJrDtQ2tsComdAWb0JIpRwJLHnj1cO3bAel
-        jJr8GY4oXUUPGAJpRi5Ly6UKTQKEAHvBdsq6JQQqRLYN5yO1f2lr+QHnizs8rS5a
-        +3dB0vs3YxYy1OqKzBLaCH13QkZClNBl87/62OLpnpEm6tAOSiWsD/4unPe2kOW5
-        19aqTzwjsV2Am2OINyXSKUK1yA6B5nv9LUzO2ESIH9A06DOYlXWch6u7a0b+3URk
-        //e64IUXSJ1NqLsVrX68mC2ysMMojbRiOdmV9mPUcpizb0devpvc"""
 
 
 class FredHutchAzureIdp(IdpConfig):
