@@ -13,7 +13,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
         id: guidance
-      - uses: uwit-iam/actions/update-pr-branch-version@0.1
+      - uses: uwit-iam/actions/update-pr-branch-version@0.1.16
         with:
           github-token: ${{ github.token }}
           version-guidance: ${{ steps.guidance.output.guidance }}
