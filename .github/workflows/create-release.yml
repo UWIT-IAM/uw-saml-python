@@ -36,7 +36,7 @@ jobs:
           echo "::set-output name=short-sha::${GITHUB_SHA:0:10}"
         id: configure
 
-      - uses: UWIT-IAM/actions/set-up-slack-notification-canvas@0.1.8
+      - uses: uwit-iam/actions/set-up-slack-notification-canvas@0.1.18
         id: create-canvas
         env:
           description_prefix: ${{ env.dry_run && '[DRY RUN] ' || '' }}
@@ -64,7 +64,7 @@ jobs:
               ]
             }
 
-      - uses: UWIT-IAM/actions/update-slack-workflow-canvas@0.1.8
+      - uses: uwit-iam/actions/update-slack-workflow-canvas@0.1.18
         if: steps.create-canvas.outputs.canvas-id
         env:
           commit_url: >
@@ -80,7 +80,7 @@ jobs:
         id: run-tests
 
       - if: always() && steps.create-canvas.outputs.canvas-id
-        uses: UWIT-IAM/actions/update-slack-workflow-canvas@0.1.8
+        uses: uwit-iam/actions/update-slack-workflow-canvas@0.1.18
         env:
           test-status: ${{ steps.run-tests.outcome == 'success' && 'succeeded' || 'failed' }}
           release-status: ${{ steps.run-tests.outcome == 'success' && 'in progress' || 'not started' }}
@@ -97,7 +97,7 @@ jobs:
           commit: ${{ github.sha }}
           tag: ${{ steps.configure.outputs.version }}
 
-      - uses: UWIT-IAM/actions/update-slack-workflow-canvas@0.1.8
+      - uses: uwit-iam/actions/update-slack-workflow-canvas@0.1.18
         if: success() && steps.create-canvas.outputs.canvas-id
         env:
           release_version: ${{ steps.configure.outputs.version }}
@@ -116,6 +116,6 @@ jobs:
         id: publish-release
 
       - if: always() && steps.create-canvas.outputs.canvas-id
-        uses: UWIT-IAM/actions/finalize-slack-notification-canvas@0.1.8
+        uses: uwit-iam/actions/finalize-slack-notification-canvas@0.1.18
         with:
           workflow-status: ${{ job.status == 'failure' && 'failed' || 'succeeded' }}
