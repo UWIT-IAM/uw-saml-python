@@ -16,5 +16,5 @@ jobs:
       - uses: uwit-iam/actions/update-pr-branch-version@0.1.16
         with:
           github-token: ${{ github.token }}
-          version-guidance: ${{ steps.guidance.output.guidance }}
+          version-guidance: ${{ steps.guidance.outputs.guidance }}
       - run: ./scripts/pre-push.sh --check-only
