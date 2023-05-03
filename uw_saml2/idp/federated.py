@@ -13,22 +13,24 @@ class CascadiaIdp(IdpConfig):
     sso_url = "https://sts.cascadia.edu/adfs/ls/"
     id_attribute = "employeeNumber"
     x509_cert = """
-        MIIC3DCCAcSgAwIBAgIQMIdwSJDYuLVNwseBCkxA4zANBgkqhkiG9w0BAQsFADAq
-        MSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2FkaWEuZWR1MB4XDTIz
-        MDQxNjEwNDY1NFoXDTI0MDQxNTEwNDY1NFowKjEoMCYGA1UEAxMfQURGUyBTaWdu
-        aW5nIC0gc3RzLmNhc2NhZGlhLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
-        AQoCggEBAMe4H/m7hmZkSXYtYSRq9Uc23FwiXqPyeP/DwPR5+1lPVRrA5NskAtLI
-        5W4FLm7d+PAKBgCr9RvWzEkvG7YeQOXWInqF2/KObTa0LNogO3zI4Pr2yzIOsFkd
-        9X/xx0CSlpckMDJdoc15aXTpSC5PDn/yoKR0+Qk+tP3Pd8X1fg0ShbGhnhPl6tk5
-        nXwJSTqPwrKgPr36Sk8vf3uPDvoU6vXjW7Dk9Yoo4gu6RwO+riujjrELdR44aaJ2
-        8INho3yL6pLQ9UyT+J5agEIwsTEJeVabdhO8bAsRwXK3UOgbqrJbfcCGQJiQKQWv
-        6NL5eYDH8yyjyTwzl8aYWNqhmQVGIXkCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEA
-        TZul0d3Ambn5rg75I2IsjqQJckDJfVB9fhSQ2fK9fK1yZ9lRQDox5Zidu8q95ugn
-        4cmtSqS/260TvsWvRcJK3KbiZ46DmrlANF9qiAjClKIrv3uYHZb0pJd2j+ZKdVOT
-        8EQ2uSOElcY7ZBx+55yAzCW8TSGA3TMLRcKXozfk++HFoLEXbZaTo447BUb9b82U
-        Mv42rFI66/59obGWdQ6UHyGCvyN4FBd4nYCcpM6pKxOfhMbAA7F6rcCRYisSjkZe
-        5FymL4FYVDuJ6WdSaWEIbpojD8+nnJpS8Yal/8qicwMWCT9VpUDHmsZC5WiKmTXm
-        RXE3esrKhhuPEkK1Qk0mLw==
+        MIIC3DCCAcSgAwIBAgIQXrfPPZMKPYlC3T8Lh+ONhDANBgkqhkiG9w0B
+        AQsFADAqMSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBzdHMuY2FzY2Fk
+        aWEuZWR1MB4XDTIyMDUwNjA5MjkwMloXDTIzMDUwNjA5MjkwMlowKjEo
+        MCYGA1UEAxMfQURGUyBTaWduaW5nIC0gc3RzLmNhc2NhZGlhLmVkdTCC
+        ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALNtzF2VwFEaKpsp
+        H0AmNQHy3rx23wd3bj3NvwsfyHafydWxxivu9oOLne4MMzB1I20NvEN9
+        Jw5gB9n+gBPB4K8njsHtBESUoy6wFPj4V+kYDpHJmX9xuIP1rG0OZ/X8
+        8uYbImnN1//dDPR6WFg65VBs9TWF4pxFXMnPmAqV7kgVIJhZfbA3Dmfc
+        1SzIoA/YGQ2bOuXktN2ZOiRcYgtmR3W1yFepcGotL616gWANRa6qg85t
+        ReKde3286HE3MFBXa1lM2i2fDpYkwQuZVsXVKZiRyCYepTW6Y+zvZzDT
+        jqqOSU++wSJj32nz2XqYeKhk89FljDgNWNUEh3bE8NwuQIUCAwEAATAN
+        BgkqhkiG9w0BAQsFAAOCAQEAm3AYm9qdrh2EKK7+8JVXysx90OS+rz+o
+        MGtGKDwPK9SLCx56wcyMF+332hNrHgA3+RmZCndUjSaap2xdoA5Ubn1V
+        SNWAZR4ERcinhojIJntKEUtPkE3GoBdr2Ta7xC6kiI+bt3R5/yLQ/1AU
+        w8vQoMv6LEYGZ82zRihwVo5SfAc/TxvjNYAMrF5YPj1OHCEKXJITnf5v
+        ChARq3CysO6F1oY/yxBT9VeHvqWYQc9eWIeUwVflBsl6QWRi6kjv3ezQ
+        xPUjFRIVJr31JLd7h3eI4AGCDiuZP0Ro8xrxJOObcKMPdBE6PkT+q8JA
+        krm7bWjDEu8/wRKVz894pKIC/oiklg==
     """
 
 
