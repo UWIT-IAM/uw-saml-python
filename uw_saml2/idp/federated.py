@@ -32,6 +32,42 @@ class CascadiaIdp(IdpConfig):
     """
 
 
+class CascadiaAzureIdp(IdpConfig):
+    """
+    Cascadia Azure configuration to replace CascadiaIdp (also, using FH as template)
+    App Federation Metadata Url https://login.microsoftonline.com/2505efd9-9f5d-4941-865c-03c9b1b88613/federationmetadata/2007-06/federationmetadata.xml?appid=668d7144-d842-4069-a70b-cae9f6ccc14f
+    Login URL: https://login.microsoftonline.com/2505efd9-9f5d-4941-865c-03c9b1b88613/saml2
+    Azure AD Identifier: https://sts.windows.net/2505efd9-9f5d-4941-865c-03c9b1b88613/
+    Logout URL: https://login.microsoftonline.com/2505efd9-9f5d-4941-865c-03c9b1b88613/saml2
+    """
+
+    _azure_tenant_id = "2505efd9-9f5d-4941-865c-03c9b1b88613"
+    _attribute_prefix = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims"
+    _attribute_prefix2 = "http://schemas.microsoft.com/identity/claims"
+
+    entity_id = f"https://sts.windows.net/{_azure_tenant_id}/"
+    sso_url = f"https://login.microsoftonline.com/{_azure_tenant_id}/saml2"
+    id_attribute = "employeeNumber"
+    x509_cert = """
+        MIIC8DCCAdigAwIBAgIQW2YmoB9jVZBN+X8BnmMIbTANBgkqhkiG9w0BAQsFADA0
+        MTIwMAYDVQQDEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZp
+        Y2F0ZTAeFw0yMzA1MDEyMTQ1MDVaFw0yNjA1MDEyMTQ1MDVaMDQxMjAwBgNVBAMT
+        KU1pY3Jvc29mdCBBenVyZSBGZWRlcmF0ZWQgU1NPIENlcnRpZmljYXRlMIIBIjAN
+        BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr+dzHUWeBI5HozHBuB1hFSh67A7m
+        lPJxqnNsw4rGV72niCDSzn8eFZUWH2RDQjWRWdjWaaE39ZTPmrAlhi9II0Ezw8IW
+        /kGprP/OF9qtXgYZ3Vd0iLSowtmPtvfVDYHs42VHd1pcCGZO68L9cnk0rxJayqjN
+        itljXIIrQ4nqSO2aSCx66m/jA6mGFj36+wJle8zHcBPFKlIxaGLx04A72EPVb8Sp
+        s4yc1gKhdEHrvGjmqnjlz997iU1H8esLDAwMihO6Ha6tFdj29/JPCTJMWM2bY4dw
+        juTEMncRodHVBADdtvasW6JlhcH6KNqvClxU0/x+1dkiiF/2icHYatdHdQIDAQAB
+        MA0GCSqGSIb3DQEBCwUAA4IBAQBRhl49scTEf17CBrT9Lk5vsFCrcS/wMpSi569t
+        hUmxrQmx9jyEfQ7M4b3bH50nTU6Z/2whJq1Fcy3gHL8zB8UvGLHWnTE2wHQ1+Yzs
+        u+mkjAUOgSiFGX5aVHAco6eU/MwgIBcgA4D0+hmcVlrWQlmdq/juXQ7Bto7KYMu+
+        52ui4kMavtgftgtfrNmE9b/eKFqTA3wYEXLZVJzclMm3g3VItWnfvRpF/eG8CpjI
+        wJPxARowqyxR5q6PWX5JzOtFzuCx0vJ/jI0o8iAg53fOitgDFj3E6/qxjPhoDY+Q
+        Pq4dr8god4m9Nr6k8kFWBbL2sXn1GC72SDeuvk0Q4X3t8tLb
+    """
+
+
 class CollegenetIdp(IdpConfig):
     """
     One thing of note about collegenet is that it encrypts attributes and thus
