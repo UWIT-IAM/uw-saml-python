@@ -124,22 +124,22 @@ class FredHutchAzureIdp(IdpConfig):
         f"{_attribute_prefix2}/authnmethodsreferences": "saml_authncontextclassref",
     }
     x509_cert = """
-        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
+        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
-        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
+        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
-        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"""
+        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"""
 
 
 class SccaIdp(IdpConfig):
