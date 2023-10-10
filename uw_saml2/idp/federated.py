@@ -66,6 +66,12 @@ class CascadiaAzureIdp(IdpConfig):
         wJPxARowqyxR5q6PWX5JzOtFzuCx0vJ/jI0o8iAg53fOitgDFj3E6/qxjPhoDY+Q
         Pq4dr8god4m9Nr6k8kFWBbL2sXn1GC72SDeuvk0Q4X3t8tLb
     """
+    security = {
+        "requestedAuthnContext": [
+            "urn:oasis:names:tc:SAML:2.0:ac:classes:Password",
+            "urn:oasis:names:tc:SAML:2.0:ac:classes:X509",
+        ]
+    }
 
 
 class CollegenetIdp(IdpConfig):
@@ -140,6 +146,12 @@ class FredHutchAzureIdp(IdpConfig):
         fMU1NZFfOfsaDjM18iSBDcsYIDeSadDh8knyFRxYGXHYrifEEq5qZBgnXXhYZLse
         4BimG9X9nynGlI6QcU5Qj7gnddQOQpk2OFFAGoUBw+vQaZNZLDGGcyvbRaueuXSh
         4gzm/WDtjnJ/Cod/Qg8OfJLEARBkLQZpvCFlTDFJ1dkDDRMC"""
+    security = {
+        "requestedAuthnContext": [
+            "urn:oasis:names:tc:SAML:2.0:ac:classes:Password",
+            "urn:oasis:names:tc:SAML:2.0:ac:classes:X509",
+        ]
+    }
 
 
 class SccaIdp(IdpConfig):
