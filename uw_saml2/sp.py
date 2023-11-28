@@ -2,6 +2,9 @@
 from urllib.parse import urlparse
 import os
 
+MULTI_AUTHN_CONTEXT_X509 = ["urn:oasis:names:tc:SAML:2.0:ac:classes:Password",
+                            "urn:oasis:names:tc:SAML:2.0:ac:classes:X509"]
+
 TWO_FACTOR_CONTEXT = "https://refeds.org/profile/mfa"
 
 
@@ -46,7 +49,7 @@ class Config(object):
     def key(self):
         return self._read_file(self.key_file)
 
-    def config(self, idp, two_factor=False):
+    def config(self, idp, two_factor=False, mfazure_factor=False):
         """Return config in a way that makes sense to OneLogin_Saml2_Auth."""
         data = {
             "strict": True,
@@ -74,4 +77,15 @@ class Config(object):
                     }
                 }
             )
+
+        if mfazure_factor or getattr(idp, "multi_authn_context_x509", False):
+            data.update(
+                {
+                    "security": {
+                        "requestedAuthnContext": MULTI_AUTHN_CONTEXT_X509,
+                        "failOnAuthnContextMismatch": True,
+                    }
+                }
+            )
+
         return data

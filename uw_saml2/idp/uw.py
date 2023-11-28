@@ -39,6 +39,10 @@ class UwIdp(IdpConfig):
     }
 
 
+class MultiAuthnContextX509(UwIdp):
+    mfazure_factor = True
+
+
 class UwIdpTwoFactor(UwIdp):
     two_factor = True
 
