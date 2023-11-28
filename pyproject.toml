@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "uw-saml"
-version = "1.2.7"
+version = "1.2.8"
 description = "A UW-specific adapter to the python3-saml package."
 authors = []
 license = "Apache 2.0"
