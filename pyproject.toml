@@ -21,7 +21,7 @@ python3-saml = ['python3-saml']
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
 pytest-cov = "^3.0.0"
-black = "^21.9b0"
+black = "^22.3.0"
 mock = "^4.0.3"
 python3-saml = "^1.14.0"
 lxml = "5.3.2"
