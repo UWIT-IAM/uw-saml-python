@@ -5,6 +5,7 @@ import os
 MULTI_AUTHN_CONTEXT_X509 = [
     "urn:oasis:names:tc:SAML:2.0:ac:classes:Password",
     "urn:oasis:names:tc:SAML:2.0:ac:classes:X509",
+    "urn:oasis:names:tc:SAML:2.0:ac:classes:SmartcardPKI",  # Entra FIDO2
 ]
 
 TWO_FACTOR_CONTEXT = "https://refeds.org/profile/mfa"
