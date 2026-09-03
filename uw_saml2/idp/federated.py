@@ -49,22 +49,22 @@ class CascadiaAzureIdp(IdpConfig):
     sso_url = f"https://login.microsoftonline.com/{_azure_tenant_id}/saml2"
     id_attribute = "employeeNumber"
     x509_cert = """
-        MIIC8DCCAdigAwIBAgIQW2YmoB9jVZBN+X8BnmMIbTANBgkqhkiG9w0BAQsFADA0
+        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
-        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
+        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
-        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
+        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
     """
     multi_authn_context_x509 = True
 
