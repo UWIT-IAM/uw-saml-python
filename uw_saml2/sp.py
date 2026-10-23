@@ -87,6 +87,9 @@ class Config(object):
                 {
                     "security": {
                         "requestedAuthnContext": MULTI_AUTHN_CONTEXT_X509,
+                        "requestedAuthnContextComparison": getattr(
+                            idp, "authn_context_comparison", "exact"
+                        ),
                         "failOnAuthnContextMismatch": True,
                     }
                 }
