@@ -67,6 +67,7 @@ class CascadiaAzureIdp(IdpConfig):
         62x0eMWPR1xClDeX5qCVBjSo+G1lVTUKdUHAPut4N774BIXv
     """
     multi_authn_context_x509 = True
+    authn_context_comparison = "minimum"   #  overrides default "exact"
 
 
 class CollegenetIdp(IdpConfig):
