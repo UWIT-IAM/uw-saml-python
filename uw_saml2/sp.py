@@ -72,6 +72,17 @@ class Config(object):
                 "privateKey": self.key,
             },
         }
+        if getattr(idp, "skip_authn_context", False):
+            data.update(
+                {
+                    "security": {
+                        "requestedAuthnContext": False,
+                        "failOnAuthnContextMismatch": True,
+                    }
+                }
+            )
+            return data # return early if we are skipping authn context entirely
+
         if two_factor or getattr(idp, "two_factor", False):
             data.update(
                 {
