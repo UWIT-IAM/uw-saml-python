@@ -66,8 +66,10 @@ class CascadiaAzureIdp(IdpConfig):
         viR4BhgRMEAJi3JH7zzHKWDbqv3YRWxuy+1oqMvSDOP8AqouT6FtGvXQB8iyUWWl
         62x0eMWPR1xClDeX5qCVBjSo+G1lVTUKdUHAPut4N774BIXv
     """
-    multi_authn_context_x509 = True
-    authn_context_comparison = "minimum"  #  overrides default "exact"
+    multi_authn_context_x509 = False
+    skip_authn_context = True
+    # suppress requestedAuthnContext entirely because it
+    # generates "requestedAuthnContext": False in sp.py
 
 
 class CollegenetIdp(IdpConfig):
