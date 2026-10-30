@@ -76,7 +76,7 @@ class Config(object):
             data.update(
                 {
                     "security": {
-                        "requestedAuthnContext": False,
+                        "requestedAuthnContext": False, # introduced for CascadiaAzureIdp
                         "failOnAuthnContextMismatch": True,
                     }
                 }
