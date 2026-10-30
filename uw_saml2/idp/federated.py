@@ -67,7 +67,7 @@ class CascadiaAzureIdp(IdpConfig):
         62x0eMWPR1xClDeX5qCVBjSo+G1lVTUKdUHAPut4N774BIXv
     """
     multi_authn_context_x509 = False
-    skip_authn_context = True  
+    skip_authn_context = True
     # suppress requestedAuthnContext entirely because it
     # generates "requestedAuthnContext": False in sp.py
 
