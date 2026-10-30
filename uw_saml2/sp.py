@@ -81,7 +81,7 @@ class Config(object):
                     }
                 }
             )
-            return data # return early if we are skipping authn context entirely
+            return data  # return early if we are skipping authn context entirely
 
         if two_factor or getattr(idp, "two_factor", False):
             data.update(
