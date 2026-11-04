@@ -92,10 +92,10 @@ To use a distributed cache such as redis or memcached you would inject a
 cache object into `uw_saml2.auth.CACHE`. Here's an example of how to do it...
 
 ```python
-import werkzeug.contrib.cache
+import cachelib
 import uw_saml2.auth
 
-uw_saml2.auth.CACHE = werkzeug.contrib.cache.RedisCache()
+uw_saml2.auth.CACHE = cachelib.RedisCache()
 ```
 
 Django's cache backend uses the same methods so that could be injected as well.
